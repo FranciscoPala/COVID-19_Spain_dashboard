@@ -27,23 +27,23 @@ def get_data():
     return data
 
 
-def get_daily_sma7(data, by=['date']):
+def get_sma7(data, by='date'):
     # groupby date
-    by_date = data.groupby(by, as_index=False).agg(
+    by_col = data.groupby(by, as_index=False).agg(
         dailyCases = ('cases', sum),
         dailyHospitalizations = ('hospitalizations', sum),
         dailyICU = ('icu', sum),
         dailyDeaths = ('deaths', sum),
-    ).sort_values('date')
+    ).sort_values(by)
     # smooth to sma7
     cols = ['dailyCases', 'dailyHospitalizations', 'dailyICU', 'dailyDeaths']
-    by_date.loc[:,cols] = by_date.loc[:,cols].rolling(7).mean().fillna(by_date.loc[:,cols])
-    by_date.loc[:,cols] = by_date.loc[:,cols].astype(int)
-    return by_date
+    by_col.loc[:,cols] = by_col.loc[:,cols].rolling(7).mean().fillna(by_col.loc[:,cols])
+    by_col.loc[:,cols] = by_col.loc[:,cols].astype(int)
+    return by_col
 
 
-def get_waves(get_daily_sma7, data):
-    daily_totals = get_daily_sma7(data)
+def get_waves(get_sma7, data):
+    daily_totals = get_sma7(data, by=['date'])
     # get peak indices
     peaks, _ = find_peaks(
         x = daily_totals.dailyCases,
