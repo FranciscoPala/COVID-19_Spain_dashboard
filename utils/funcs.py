@@ -45,7 +45,11 @@ def get_sma7_by_age(data):
     ).sort_values(['age','date']).reset_index()
     # smooth to sma7
     by_age = by_age.set_index('date').groupby('age').rolling(7).mean()
-    return by_age.fillna(0).astype(int).reset_index()
+    by_age = by_age.fillna(0).astype(int).reset_index()
+    all_ages = by_age.groupby('date', as_index=False).sum()
+    all_ages['age'] = 'All Ages'
+    data_out = pd.concat([by_age, all_ages])
+    return data_out
 
 
 def get_waves(get_sma7, data):
