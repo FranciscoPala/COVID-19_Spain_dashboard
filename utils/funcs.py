@@ -78,3 +78,14 @@ def get_waves(get_sma7, data):
         labels = range(1, wave_dates.size)
         )
     return data
+
+def get_sns_heatmap_data_cases(data):
+    # gby age and wave
+    totals_age_wave = data.groupby(['age', 'wave'], as_index = False).sum()
+    # drop NC age
+    mask = totals_age_wave.age != 'NC'
+    totals_age_wave = totals_age_wave[mask]
+    # get cases dataframe
+    heatmap_age_wave_cases = pd.crosstab(totals_age_wave.wave, totals_age_wave.age, totals_age_wave.cases, aggfunc=sum, normalize = 'index')
+    totals_wave = totals_age_wave.groupby('wave', as_index=False).sum()
+    return heatmap_age_wave_cases, totals_wave

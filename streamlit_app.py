@@ -1,8 +1,11 @@
 import streamlit as st
 import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
 import pathlib
-from utils.funcs import *
 import plotly.express as px
+from utils.funcs import *
+from io import BytesIO
 
 # set cwd
 cwd = pathlib.Path.cwd()
@@ -15,7 +18,7 @@ st.set_page_config(
 sections = [
     "Overview",
     "Analysis by Age Group",
-    "By Province Analysis",
+    "Analysis By Province",
     "Predictions",
 ]
 rad = st.sidebar.radio(
@@ -41,14 +44,18 @@ if rad== "Overview":
         new_data = get_waves(get_sma7,new_data)
         new_data.to_csv(cwd / 'data/covid_19_spain.csv', sep = ';', index=False)
 
-# read csv to process
-data = pd.read_csv(cwd / 'data/covid_19_spain.csv', sep = ';')
+
 # Time series by age group section
-if rad == "Time Series By Age Group":
+if rad == "Analysis by Age Group":
+    # read csv to process
+    data = pd.read_csv(cwd / 'data/covid_19_spain.csv', sep = ';')
+
+    # Markdown text
     st.write("""
     # Time-Series Analysis by Age Group
-    The purpose of these section is to describe how 
+    The purpose of these section is...
     """)
+
     # process the data to plot
     age_series = get_sma7_by_age(data)
     # plot cases
@@ -61,7 +68,62 @@ if rad == "Time Series By Age Group":
         width=1600,
         height=500,
         title = 'Daily Cases of Covid-19 by Age in Spain, 7-day Simple Moving Average')
+    
     st.plotly_chart(fig, use_container_width=True)
+
+    # get data for heatmap data
+    heatmap, wave_totals = get_sns_heatmap_data_cases(data)
+    # plot heatmap + barplot
+    # figure and spacing
+    size_unit=np.array([1.7*1.77, 1])
+    fig, ax = plt.subplots(1, 2, figsize=6*size_unit, gridspec_kw={"width_ratios": (.6, .4)})
+    fig.subplots_adjust(wspace=0, hspace=0)
+    # heatmap
+    sns.heatmap(
+        data = heatmap, 
+        annot=True, 
+        linewidths=0.1, 
+        cmap='Blues', 
+        fmt='.2f', 
+        ax = ax[0],
+        )
+    # barplot
+    sns.barplot(
+        data = wave_totals/1000, 
+        x='cases', 
+        y='wave', 
+        orient = 'h', 
+        color=sns.color_palette()[0], 
+        ax=ax[1],
+        alpha=0.8,
+        )
+    # despine barplot
+    sns.despine(fig=fig, ax=ax[1], top=True, bottom=True, left=True, right=True)
+    # Axes styling
+    ax[0].tick_params(axis=u'both', which=u'both',length=0)
+    ax[1].tick_params(axis=u'both', which=u'both',length=0)
+    ax[1].set(
+        ylabel=None,
+        xlabel=None,
+        yticklabels=[],
+        xticklabels=[],
+        xticks=[],
+        )
+    # show labels
+    ax[1].bar_label(
+        ax[1].containers[0],
+        fmt='%.0f',
+        padding=7,
+        )
+    # titles
+    ax[0].set_title('Distribution of Cases Within Wave by Age')
+    ax[1].set_title('Total Cases by Wave (Thousands)')
+
+    buf = BytesIO()
+    fig.savefig(buf, format="png")
+    st.image(buf)
+
+
     # plot hospitalizations
     fig = px.line(
         age_series, 
@@ -73,6 +135,7 @@ if rad == "Time Series By Age Group":
         height=500,
         title = 'Daily Hospitalizations of Covid-19 by Age in Spain, 7-day Simple Moving Average')
     st.plotly_chart(fig, use_container_width=True)
+
     # plot ICU admissions
     fig = px.line(
         age_series, 
@@ -96,6 +159,8 @@ if rad == "Time Series By Age Group":
         title = 'Daily Deaths of Covid-19 by Age in Spain, 7-day Simple Moving Average')
     st.plotly_chart(fig, use_container_width=True)
 
-if rad == "Totals By Wave":
-    st.write('Totals By Wave Section')
+if rad == "Analysis By Province":
+    st.write('TODO')
 
+if rad == "Predictions":
+    st.write("TODO")
