@@ -14,8 +14,9 @@ st.set_page_config(
 # split into sections
 sections = [
     "Overview",
-    "Time Series By Age Group",
-    "Totals By Wave",
+    "Analysis by Age Group",
+    "By Province Analysis",
+    "Predictions",
 ]
 rad = st.sidebar.radio(
     "Navigation",
