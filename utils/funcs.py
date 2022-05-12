@@ -89,3 +89,38 @@ def get_sns_heatmap_data_cases(data):
     heatmap_age_wave_cases = pd.crosstab(totals_age_wave.wave, totals_age_wave.age, totals_age_wave.cases, aggfunc=sum, normalize = 'index')
     totals_wave = totals_age_wave.groupby('wave', as_index=False).sum()
     return heatmap_age_wave_cases, totals_wave
+
+def get_sns_heatmap_data_hospitalizations(data):
+    # gby age and wave
+    totals_age_wave = data.groupby(['age', 'wave'], as_index = False).sum()
+    # drop NC age
+    mask = totals_age_wave.age != 'NC'
+    totals_age_wave = totals_age_wave[mask]
+    # get hospitalizations dataframe
+    heatmap_age_wave_hospitalizations = pd.crosstab(totals_age_wave.wave, totals_age_wave.age, totals_age_wave.hospitalizations, aggfunc=sum, normalize = 'index')
+    totals_wave = totals_age_wave.groupby('wave', as_index=False).sum()
+    return heatmap_age_wave_hospitalizations, totals_wave
+
+
+def get_sns_heatmap_data_icu(data):
+    # gby age and wave
+    totals_age_wave = data.groupby(['age', 'wave'], as_index = False).sum()
+    # drop NC age
+    mask = totals_age_wave.age != 'NC'
+    totals_age_wave = totals_age_wave[mask]
+    # get icu dataframe
+    heatmap_age_wave_icu = pd.crosstab(totals_age_wave.wave, totals_age_wave.age, totals_age_wave.icu, aggfunc=sum, normalize = 'index')
+    totals_wave = totals_age_wave.groupby('wave', as_index=False).sum()
+    return heatmap_age_wave_icu, totals_wave
+
+
+def get_sns_heatmap_data_deaths(data):
+    # gby age and wave
+    totals_age_wave = data.groupby(['age', 'wave'], as_index = False).sum()
+    # drop NC age
+    mask = totals_age_wave.age != 'NC'
+    totals_age_wave = totals_age_wave[mask]
+    # get deaths dataframe
+    heatmap_age_wave_deaths = pd.crosstab(totals_age_wave.wave, totals_age_wave.age, totals_age_wave.deaths, aggfunc=sum, normalize = 'index')
+    totals_wave = totals_age_wave.groupby('wave', as_index=False).sum()
+    return heatmap_age_wave_deaths, totals_wave

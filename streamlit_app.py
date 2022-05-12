@@ -56,6 +56,13 @@ if rad == "Analysis by Age Group":
     The purpose of these section is...
     """)
 
+    st.write("""
+    ## Cases
+    """)
+    st.write("""
+    ### Daily Cases By Age
+    """)
+
     # process the data to plot
     age_series = get_sma7_by_age(data)
     # plot cases
@@ -67,16 +74,20 @@ if rad == "Analysis by Age Group":
         template = 'simple_white',
         width=1600,
         height=500,
-        title = 'Daily Cases of Covid-19 by Age in Spain, 7-day Simple Moving Average')
+        title = '7-day Simple Moving Average of Daily Cases')
     
     st.plotly_chart(fig, use_container_width=True)
+
+    st.write("""
+    ### Within-Wave Distribution by Age and Total Cases
+    """)
 
     # get data for heatmap data
     heatmap, wave_totals = get_sns_heatmap_data_cases(data)
     # plot heatmap + barplot
     # figure and spacing
     size_unit=np.array([1.7*1.77, 1])
-    fig, ax = plt.subplots(1, 2, figsize=6*size_unit, gridspec_kw={"width_ratios": (.6, .4)})
+    fig, ax = plt.subplots(1, 2, figsize=7*size_unit, gridspec_kw={"width_ratios": (.6, .4)})
     fig.subplots_adjust(wspace=0, hspace=0)
     # heatmap
     sns.heatmap(
@@ -89,7 +100,7 @@ if rad == "Analysis by Age Group":
         )
     # barplot
     sns.barplot(
-        data = wave_totals/1000, 
+        data = wave_totals, 
         x='cases', 
         y='wave', 
         orient = 'h', 
@@ -123,6 +134,12 @@ if rad == "Analysis by Age Group":
     fig.savefig(buf, format="png")
     st.image(buf)
 
+    st.write("""
+    ## Hospitalizations
+    """)
+    st.write("""
+    ### Daily Hospitalizations By Age
+    """)
 
     # plot hospitalizations
     fig = px.line(
@@ -133,8 +150,73 @@ if rad == "Analysis by Age Group":
         template = 'simple_white',
         width=1600,
         height=500,
-        title = 'Daily Hospitalizations of Covid-19 by Age in Spain, 7-day Simple Moving Average')
+        title = '7-day Simple Moving Average of Daily Hospitalizations')
     st.plotly_chart(fig, use_container_width=True)
+
+    st.write("""
+    ### Within-Wave Distribution by Age and Total Hospitalizations
+    """)
+
+    # get data for heatmap data
+    heatmap, wave_totals = get_sns_heatmap_data_hospitalizations(data)
+    # plot heatmap + barplot
+    # figure and spacing
+    size_unit=np.array([1.7*1.77, 1])
+    fig, ax = plt.subplots(1, 2, figsize=7*size_unit, gridspec_kw={"width_ratios": (.6, .4)})
+    fig.subplots_adjust(wspace=0, hspace=0)
+    # heatmap
+    sns.heatmap(
+        data = heatmap, 
+        annot=True, 
+        linewidths=0.1, 
+        cmap='Blues', 
+        fmt='.2f', 
+        ax = ax[0],
+        )
+    # barplot
+    sns.barplot(
+        data = wave_totals,
+        x='hospitalizations', 
+        y='wave', 
+        orient = 'h', 
+        color=sns.color_palette()[0], 
+        ax=ax[1],
+        alpha=0.8,
+        )
+    # despine barplot
+    sns.despine(fig=fig, ax=ax[1], top=True, bottom=True, left=True, right=True)
+    # Axes styling
+    ax[0].tick_params(axis=u'both', which=u'both',length=0)
+    ax[1].tick_params(axis=u'both', which=u'both',length=0)
+    ax[1].set(
+        ylabel=None,
+        xlabel=None,
+        yticklabels=[],
+        xticklabels=[],
+        xticks=[],
+        )
+    # show labels
+    ax[1].bar_label(
+        ax[1].containers[0],
+        fmt='%.0f',
+        padding=7,
+        )
+    # titles
+    ax[0].set_title('Distribution of Cases Within Wave by Age')
+    ax[1].set_title('Total Hospitalizations by Wave')
+
+    buf = BytesIO()
+    fig.savefig(buf, format="png")
+    st.image(buf)
+
+
+    st.write("""
+    ## ICU Admissions
+    """)
+    st.write("""
+    ### Daily ICU Admissions By Age
+    """)
+
 
     # plot ICU admissions
     fig = px.line(
@@ -145,8 +227,73 @@ if rad == "Analysis by Age Group":
         template = 'simple_white',
         width=1600,
         height=500,
-        title = 'Daily ICU Admissions of Covid-19 by Age in Spain, 7-day Simple Moving Average')
+        title = '7-day Simple Moving Average of ICU Admissions')
     st.plotly_chart(fig, use_container_width=True)
+
+
+    st.write("""
+    ### Within-Wave Distribution by Age and Total ICU Admissions
+    """)
+
+    # get data for heatmap data
+    heatmap, wave_totals = get_sns_heatmap_data_icu(data)
+    # plot heatmap + barplot
+    # figure and spacing
+    size_unit=np.array([1.7*1.77, 1])
+    fig, ax = plt.subplots(1, 2, figsize=7*size_unit, gridspec_kw={"width_ratios": (.6, .4)})
+    fig.subplots_adjust(wspace=0, hspace=0)
+    # heatmap
+    sns.heatmap(
+        data = heatmap, 
+        annot=True, 
+        linewidths=0.1, 
+        cmap='Blues', 
+        fmt='.2f', 
+        ax = ax[0],
+        )
+    # barplot
+    sns.barplot(
+        data = wave_totals,
+        x='icu', 
+        y='wave', 
+        orient = 'h', 
+        color=sns.color_palette()[0], 
+        ax=ax[1],
+        alpha=0.8,
+        )
+    # despine barplot
+    sns.despine(fig=fig, ax=ax[1], top=True, bottom=True, left=True, right=True)
+    # Axes styling
+    ax[0].tick_params(axis=u'both', which=u'both',length=0)
+    ax[1].tick_params(axis=u'both', which=u'both',length=0)
+    ax[1].set(
+        ylabel=None,
+        xlabel=None,
+        yticklabels=[],
+        xticklabels=[],
+        xticks=[],
+        )
+    # show labels
+    ax[1].bar_label(
+        ax[1].containers[0],
+        fmt='%.0f',
+        padding=7,
+        )
+    # titles
+    ax[0].set_title('Distribution of Cases Within Wave by Age')
+    ax[1].set_title('Total ICU Admissions by Wave')
+
+    buf = BytesIO()
+    fig.savefig(buf, format="png")
+    st.image(buf)
+
+    st.write("""
+    ## Deaths
+    """)
+    st.write("""
+    ### Daily Deaths By Age
+    """)
+
     # plot deaths
     fig = px.line(
         age_series, 
@@ -156,8 +303,67 @@ if rad == "Analysis by Age Group":
         template = 'simple_white',
         width=1600,
         height=500,
-        title = 'Daily Deaths of Covid-19 by Age in Spain, 7-day Simple Moving Average')
+        title = '7-day Simple Moving Average of Deaths')
     st.plotly_chart(fig, use_container_width=True)
+
+    st.write("""
+    ### Within-Wave Distribution by Age and Total Deaths
+    """)
+
+    # get data for heatmap data
+    heatmap, wave_totals = get_sns_heatmap_data_deaths(data)
+    # plot heatmap + barplot
+    # figure and spacing
+    size_unit=np.array([1.7*1.77, 1])
+    fig, ax = plt.subplots(1, 2, figsize=7*size_unit, gridspec_kw={"width_ratios": (.6, .4)})
+    fig.subplots_adjust(wspace=0, hspace=0)
+    # heatmap
+    sns.heatmap(
+        data = heatmap, 
+        annot=True, 
+        linewidths=0.1, 
+        cmap='Blues', 
+        fmt='.2f', 
+        ax = ax[0],
+        )
+    # barplot
+    sns.barplot(
+        data = wave_totals,
+        x='deaths', 
+        y='wave', 
+        orient = 'h', 
+        color=sns.color_palette()[0], 
+        ax=ax[1],
+        alpha=0.8,
+        )
+    # despine barplot
+    sns.despine(fig=fig, ax=ax[1], top=True, bottom=True, left=True, right=True)
+    # Axes styling
+    ax[0].tick_params(axis=u'both', which=u'both',length=0)
+    ax[1].tick_params(axis=u'both', which=u'both',length=0)
+    ax[1].set(
+        ylabel=None,
+        xlabel=None,
+        yticklabels=[],
+        xticklabels=[],
+        xticks=[],
+        )
+    # show labels
+    ax[1].bar_label(
+        ax[1].containers[0],
+        fmt='%.0f',
+        padding=7,
+        )
+    # titles
+    ax[0].set_title('Distribution of Cases Within Wave by Age')
+    ax[1].set_title('Total Deaths by Wave')
+
+    buf = BytesIO()
+    fig.savefig(buf, format="png")
+    st.image(buf)
+
+
+
 
 if rad == "Analysis By Province":
     st.write('TODO')
