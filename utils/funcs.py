@@ -1,5 +1,7 @@
 import pandas as pd 
 import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
 from scipy.signal import find_peaks
 
 def get_data():
@@ -79,48 +81,70 @@ def get_waves(get_sma7, data):
         )
     return data
 
-def get_sns_heatmap_data_cases(data):
+def get_wave_totals(data):
+    totals_wave = data.groupby('wave', as_index=False).sum()
+    return totals_wave
+
+
+def get_heatmap_data(data, variable):
     # gby age and wave
     totals_age_wave = data.groupby(['age', 'wave'], as_index = False).sum()
     # drop NC age
     mask = totals_age_wave.age != 'NC'
     totals_age_wave = totals_age_wave[mask]
     # get cases dataframe
-    heatmap_age_wave_cases = pd.crosstab(totals_age_wave.wave, totals_age_wave.age, totals_age_wave.cases, aggfunc=sum, normalize = 'index')
-    totals_wave = totals_age_wave.groupby('wave', as_index=False).sum()
-    return heatmap_age_wave_cases, totals_wave
-
-def get_sns_heatmap_data_hospitalizations(data):
-    # gby age and wave
-    totals_age_wave = data.groupby(['age', 'wave'], as_index = False).sum()
-    # drop NC age
-    mask = totals_age_wave.age != 'NC'
-    totals_age_wave = totals_age_wave[mask]
-    # get hospitalizations dataframe
-    heatmap_age_wave_hospitalizations = pd.crosstab(totals_age_wave.wave, totals_age_wave.age, totals_age_wave.hospitalizations, aggfunc=sum, normalize = 'index')
-    totals_wave = totals_age_wave.groupby('wave', as_index=False).sum()
-    return heatmap_age_wave_hospitalizations, totals_wave
+    heatmap_age_wave = pd.crosstab(
+        index = totals_age_wave.wave, 
+        columns = totals_age_wave.age, 
+        values = totals_age_wave[variable], 
+        aggfunc=sum, 
+        normalize = 'index'
+        )
+    return heatmap_age_wave
 
 
-def get_sns_heatmap_data_icu(data):
-    # gby age and wave
-    totals_age_wave = data.groupby(['age', 'wave'], as_index = False).sum()
-    # drop NC age
-    mask = totals_age_wave.age != 'NC'
-    totals_age_wave = totals_age_wave[mask]
-    # get icu dataframe
-    heatmap_age_wave_icu = pd.crosstab(totals_age_wave.wave, totals_age_wave.age, totals_age_wave.icu, aggfunc=sum, normalize = 'index')
-    totals_wave = totals_age_wave.groupby('wave', as_index=False).sum()
-    return heatmap_age_wave_icu, totals_wave
-
-
-def get_sns_heatmap_data_deaths(data):
-    # gby age and wave
-    totals_age_wave = data.groupby(['age', 'wave'], as_index = False).sum()
-    # drop NC age
-    mask = totals_age_wave.age != 'NC'
-    totals_age_wave = totals_age_wave[mask]
-    # get deaths dataframe
-    heatmap_age_wave_deaths = pd.crosstab(totals_age_wave.wave, totals_age_wave.age, totals_age_wave.deaths, aggfunc=sum, normalize = 'index')
-    totals_wave = totals_age_wave.groupby('wave', as_index=False).sum()
-    return heatmap_age_wave_deaths, totals_wave
+def plot_heatmap(heatmap_data, barplot_data, variable):
+    size_unit=np.array([1.7*1.77, 1])
+    fig, ax = plt.subplots(1, 2, figsize=7*size_unit, gridspec_kw={"width_ratios": (.6, .4)})
+    fig.subplots_adjust(wspace=0, hspace=0)
+    # heatmap
+    sns.heatmap(
+        data = heatmap_data, 
+        annot=True, 
+        linewidths=0.1, 
+        cmap='Blues', 
+        fmt='.2f', 
+        ax = ax[0],
+        )
+    # barplot
+    sns.barplot(
+        data = barplot_data, 
+        x=variable, 
+        y='wave', 
+        orient = 'h', 
+        color=sns.color_palette()[0], 
+        ax=ax[1],
+        alpha=0.8,
+        )
+    # despine barplot
+    sns.despine(fig=fig, ax=ax[1], top=True, bottom=True, left=True, right=True)
+    # Axes styling
+    ax[0].tick_params(axis=u'both', which=u'both',length=0)
+    ax[1].tick_params(axis=u'both', which=u'both',length=0)
+    ax[1].set(
+        ylabel=None,
+        xlabel=None,
+        yticklabels=[],
+        xticklabels=[],
+        xticks=[],
+        )
+    # show labels
+    ax[1].bar_label(
+        ax[1].containers[0],
+        fmt='%.0f',
+        padding=7,
+        )
+    # titles
+    ax[0].set_title('Distribution of Cases Within Wave by Age')
+    ax[1].set_title('Total Cases by Wave (Thousands)')
+    return fig
