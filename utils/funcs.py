@@ -21,6 +21,11 @@ def get_data():
         'num_def':'deaths',
     }
     data = data.rename(col_rename, axis = 'columns')
+    # remap ages
+    dict_remap = dict(zip(
+        data.age.unique(), 
+        ['0s', '10s', '20s', '30s', '40s', '50s', '60s', '70s', '80+', 'NC']))
+    data.age = data.age.replace(dict_remap)
     # find first case
     min_date = data.groupby('date', as_index=False).sum().query("cases > 0").date.min()
     # keep only values gte min_date
@@ -145,6 +150,6 @@ def plot_heatmap(heatmap_data, barplot_data, variable):
         padding=7,
         )
     # titles
-    ax[0].set_title('Distribution of Cases Within Wave by Age')
-    ax[1].set_title('Total Cases by Wave (Thousands)')
+    ax[0].set_title('Distribution of {} Within Wave by Age'.format(variable.capitalize()))
+    ax[1].set_title('Total {} by Wave'.format(variable.capitalize()))
     return fig

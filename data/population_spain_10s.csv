@@ -1,0 +1,511 @@
+provinciaINE,codigoProvincia,nombreProvincia,codigoCCAA,nombreCCAA,age,population
+1,VI,Araba/Álava,PV,País Vasco/Euskadi,0s,31057
+1,VI,Araba/Álava,PV,País Vasco/Euskadi,10s,32819
+1,VI,Araba/Álava,PV,País Vasco/Euskadi,20s,29909
+1,VI,Araba/Álava,PV,País Vasco/Euskadi,30s,39744
+1,VI,Araba/Álava,PV,País Vasco/Euskadi,40s,55838
+1,VI,Araba/Álava,PV,País Vasco/Euskadi,50s,50681
+1,VI,Araba/Álava,PV,País Vasco/Euskadi,60s,40956
+1,VI,Araba/Álava,PV,País Vasco/Euskadi,70s,31117
+1,VI,Araba/Álava,PV,País Vasco/Euskadi,80+,21505
+1,VI,Araba/Álava,PV,País Vasco/Euskadi,total,333626
+2,AB,Albacete,CM,Castilla-La Mancha,0s,33326
+2,AB,Albacete,CM,Castilla-La Mancha,10s,40375
+2,AB,Albacete,CM,Castilla-La Mancha,20s,42646
+2,AB,Albacete,CM,Castilla-La Mancha,30s,48130
+2,AB,Albacete,CM,Castilla-La Mancha,40s,60940
+2,AB,Albacete,CM,Castilla-La Mancha,50s,60792
+2,AB,Albacete,CM,Castilla-La Mancha,60s,43997
+2,AB,Albacete,CM,Castilla-La Mancha,70s,30602
+2,AB,Albacete,CM,Castilla-La Mancha,80+,25656
+2,AB,Albacete,CM,Castilla-La Mancha,total,386464
+3,A,Alicante/Alacant,VC,"Valenciana, Comunidad/Valenciana, Comunitat",0s,163586
+3,A,Alicante/Alacant,VC,"Valenciana, Comunidad/Valenciana, Comunitat",10s,199682
+3,A,Alicante/Alacant,VC,"Valenciana, Comunidad/Valenciana, Comunitat",20s,190879
+3,A,Alicante/Alacant,VC,"Valenciana, Comunidad/Valenciana, Comunitat",30s,234634
+3,A,Alicante/Alacant,VC,"Valenciana, Comunidad/Valenciana, Comunitat",40s,308637
+3,A,Alicante/Alacant,VC,"Valenciana, Comunidad/Valenciana, Comunitat",50s,283474
+3,A,Alicante/Alacant,VC,"Valenciana, Comunidad/Valenciana, Comunitat",60s,228250
+3,A,Alicante/Alacant,VC,"Valenciana, Comunidad/Valenciana, Comunitat",70s,169312
+3,A,Alicante/Alacant,VC,"Valenciana, Comunidad/Valenciana, Comunitat",80+,103308
+3,A,Alicante/Alacant,VC,"Valenciana, Comunidad/Valenciana, Comunitat",total,1881762
+4,AL,Almería,AN,Andalucía,0s,78151
+4,AL,Almería,AN,Andalucía,10s,82724
+4,AL,Almería,AN,Andalucía,20s,85012
+4,AL,Almería,AN,Andalucía,30s,106467
+4,AL,Almería,AN,Andalucía,40s,122876
+4,AL,Almería,AN,Andalucía,50s,102996
+4,AL,Almería,AN,Andalucía,60s,75940
+4,AL,Almería,AN,Andalucía,70s,48056
+4,AL,Almería,AN,Andalucía,80+,29570
+4,AL,Almería,AN,Andalucía,total,731792
+5,AV,Ávila,CL,Castilla y León,0s,11418
+5,AV,Ávila,CL,Castilla y León,10s,14159
+5,AV,Ávila,CL,Castilla y León,20s,14408
+5,AV,Ávila,CL,Castilla y León,30s,16870
+5,AV,Ávila,CL,Castilla y León,40s,23044
+5,AV,Ávila,CL,Castilla y León,50s,25348
+5,AV,Ávila,CL,Castilla y León,60s,21564
+5,AV,Ávila,CL,Castilla y León,70s,16195
+5,AV,Ávila,CL,Castilla y León,80+,15415
+5,AV,Ávila,CL,Castilla y León,total,158421
+6,BA,Badajoz,EX,Extremadura,0s,58003
+6,BA,Badajoz,EX,Extremadura,10s,69633
+6,BA,Badajoz,EX,Extremadura,20s,73472
+6,BA,Badajoz,EX,Extremadura,30s,84702
+6,BA,Badajoz,EX,Extremadura,40s,102026
+6,BA,Badajoz,EX,Extremadura,50s,104780
+6,BA,Badajoz,EX,Extremadura,60s,78896
+6,BA,Badajoz,EX,Extremadura,70s,55453
+6,BA,Badajoz,EX,Extremadura,80+,42978
+6,BA,Badajoz,EX,Extremadura,total,669943
+7,PM,Balears (Baleares),IB,Illes Balears (Islas Baleares),0s,108627
+7,PM,Balears (Baleares),IB,Illes Balears (Islas Baleares),10s,121764
+7,PM,Balears (Baleares),IB,Illes Balears (Islas Baleares),20s,135336
+7,PM,Balears (Baleares),IB,Illes Balears (Islas Baleares),30s,177136
+7,PM,Balears (Baleares),IB,Illes Balears (Islas Baleares),40s,207054
+7,PM,Balears (Baleares),IB,Illes Balears (Islas Baleares),50s,169245
+7,PM,Balears (Baleares),IB,Illes Balears (Islas Baleares),60s,121027
+7,PM,Balears (Baleares),IB,Illes Balears (Islas Baleares),70s,81998
+7,PM,Balears (Baleares),IB,Illes Balears (Islas Baleares),80+,50821
+7,PM,Balears (Baleares),IB,Illes Balears (Islas Baleares),total,1173008
+8,B,Barcelona (Barcelona),CT,Catalunya (Cataluña),0s,515716
+8,B,Barcelona (Barcelona),CT,Catalunya (Cataluña),10s,610292
+8,B,Barcelona (Barcelona),CT,Catalunya (Cataluña),20s,622747
+8,B,Barcelona (Barcelona),CT,Catalunya (Cataluña),30s,755477
+8,B,Barcelona (Barcelona),CT,Catalunya (Cataluña),40s,969583
+8,B,Barcelona (Barcelona),CT,Catalunya (Cataluña),50s,813609
+8,B,Barcelona (Barcelona),CT,Catalunya (Cataluña),60s,621924
+8,B,Barcelona (Barcelona),CT,Catalunya (Cataluña),70s,469898
+8,B,Barcelona (Barcelona),CT,Catalunya (Cataluña),80+,335484
+8,B,Barcelona (Barcelona),CT,Catalunya (Cataluña),total,5714730
+9,BU,Burgos,CL,Castilla y León,0s,27856
+9,BU,Burgos,CL,Castilla y León,10s,32913
+9,BU,Burgos,CL,Castilla y León,20s,32079
+9,BU,Burgos,CL,Castilla y León,30s,39560
+9,BU,Burgos,CL,Castilla y León,40s,55188
+9,BU,Burgos,CL,Castilla y León,50s,56068
+9,BU,Burgos,CL,Castilla y León,60s,48069
+9,BU,Burgos,CL,Castilla y León,70s,34823
+9,BU,Burgos,CL,Castilla y León,80+,29499
+9,BU,Burgos,CL,Castilla y León,total,356055
+10,CC,Cáceres,EX,Extremadura,0s,28452
+10,CC,Cáceres,EX,Extremadura,10s,36169
+10,CC,Cáceres,EX,Extremadura,20s,38264
+10,CC,Cáceres,EX,Extremadura,30s,45602
+10,CC,Cáceres,EX,Extremadura,40s,56465
+10,CC,Cáceres,EX,Extremadura,50s,63913
+10,CC,Cáceres,EX,Extremadura,60s,52120
+10,CC,Cáceres,EX,Extremadura,70s,35534
+10,CC,Cáceres,EX,Extremadura,80+,33039
+10,CC,Cáceres,EX,Extremadura,total,389558
+11,CA,Cádiz,AN,Andalucía,0s,114386
+11,CA,Cádiz,AN,Andalucía,10s,145393
+11,CA,Cádiz,AN,Andalucía,20s,131246
+11,CA,Cádiz,AN,Andalucía,30s,161516
+11,CA,Cádiz,AN,Andalucía,40s,206338
+11,CA,Cádiz,AN,Andalucía,50s,192271
+11,CA,Cádiz,AN,Andalucía,60s,144596
+11,CA,Cádiz,AN,Andalucía,70s,94677
+11,CA,Cádiz,AN,Andalucía,80+,55537
+11,CA,Cádiz,AN,Andalucía,total,1245960
+12,CS,Castellón/Castelló,VC,"Valenciana, Comunidad/Valenciana, Comunitat",0s,52444
+12,CS,Castellón/Castelló,VC,"Valenciana, Comunidad/Valenciana, Comunitat",10s,62742
+12,CS,Castellón/Castelló,VC,"Valenciana, Comunidad/Valenciana, Comunitat",20s,58535
+12,CS,Castellón/Castelló,VC,"Valenciana, Comunidad/Valenciana, Comunitat",30s,71797
+12,CS,Castellón/Castelló,VC,"Valenciana, Comunidad/Valenciana, Comunitat",40s,100011
+12,CS,Castellón/Castelló,VC,"Valenciana, Comunidad/Valenciana, Comunitat",50s,89109
+12,CS,Castellón/Castelló,VC,"Valenciana, Comunidad/Valenciana, Comunitat",60s,68142
+12,CS,Castellón/Castelló,VC,"Valenciana, Comunidad/Valenciana, Comunitat",70s,49585
+12,CS,Castellón/Castelló,VC,"Valenciana, Comunidad/Valenciana, Comunitat",80+,34699
+12,CS,Castellón/Castelló,VC,"Valenciana, Comunidad/Valenciana, Comunitat",total,587064
+13,CR,Ciudad Real,CM,Castilla-La Mancha,0s,41969
+13,CR,Ciudad Real,CM,Castilla-La Mancha,10s,50759
+13,CR,Ciudad Real,CM,Castilla-La Mancha,20s,54453
+13,CR,Ciudad Real,CM,Castilla-La Mancha,30s,61458
+13,CR,Ciudad Real,CM,Castilla-La Mancha,40s,74259
+13,CR,Ciudad Real,CM,Castilla-La Mancha,50s,76498
+13,CR,Ciudad Real,CM,Castilla-La Mancha,60s,58178
+13,CR,Ciudad Real,CM,Castilla-La Mancha,70s,40649
+13,CR,Ciudad Real,CM,Castilla-La Mancha,80+,34368
+13,CR,Ciudad Real,CM,Castilla-La Mancha,total,492591
+14,CO,Córdoba,AN,Andalucía,0s,67650
+14,CO,Córdoba,AN,Andalucía,10s,83440
+14,CO,Córdoba,AN,Andalucía,20s,85638
+14,CO,Córdoba,AN,Andalucía,30s,96225
+14,CO,Córdoba,AN,Andalucía,40s,116330
+14,CO,Córdoba,AN,Andalucía,50s,121213
+14,CO,Córdoba,AN,Andalucía,60s,93215
+14,CO,Córdoba,AN,Andalucía,70s,63137
+14,CO,Córdoba,AN,Andalucía,80+,49941
+14,CO,Córdoba,AN,Andalucía,total,776789
+15,C,A Coruña (La Coruña),GA,Galicia (Galicia),0s,82387
+15,C,A Coruña (La Coruña),GA,Galicia (Galicia),10s,95942
+15,C,A Coruña (La Coruña),GA,Galicia (Galicia),20s,94175
+15,C,A Coruña (La Coruña),GA,Galicia (Galicia),30s,129437
+15,C,A Coruña (La Coruña),GA,Galicia (Galicia),40s,187355
+15,C,A Coruña (La Coruña),GA,Galicia (Galicia),50s,170652
+15,C,A Coruña (La Coruña),GA,Galicia (Galicia),60s,146390
+15,C,A Coruña (La Coruña),GA,Galicia (Galicia),70s,120769
+15,C,A Coruña (La Coruña),GA,Galicia (Galicia),80+,93027
+15,C,A Coruña (La Coruña),GA,Galicia (Galicia),total,1120134
+16,CU,Cuenca,CM,Castilla-La Mancha,0s,14770
+16,CU,Cuenca,CM,Castilla-La Mancha,10s,18458
+16,CU,Cuenca,CM,Castilla-La Mancha,20s,20861
+16,CU,Cuenca,CM,Castilla-La Mancha,30s,23207
+16,CU,Cuenca,CM,Castilla-La Mancha,40s,28526
+16,CU,Cuenca,CM,Castilla-La Mancha,50s,31245
+16,CU,Cuenca,CM,Castilla-La Mancha,60s,23656
+16,CU,Cuenca,CM,Castilla-La Mancha,70s,17194
+16,CU,Cuenca,CM,Castilla-La Mancha,80+,17599
+16,CU,Cuenca,CM,Castilla-La Mancha,total,195516
+17,GI,Girona (Gerona),CT,Catalunya (Cataluña),0s,76420
+17,GI,Girona (Gerona),CT,Catalunya (Cataluña),10s,88478
+17,GI,Girona (Gerona),CT,Catalunya (Cataluña),20s,85263
+17,GI,Girona (Gerona),CT,Catalunya (Cataluña),30s,100603
+17,GI,Girona (Gerona),CT,Catalunya (Cataluña),40s,131455
+17,GI,Girona (Gerona),CT,Catalunya (Cataluña),50s,113150
+17,GI,Girona (Gerona),CT,Catalunya (Cataluña),60s,88350
+17,GI,Girona (Gerona),CT,Catalunya (Cataluña),70s,60804
+17,GI,Girona (Gerona),CT,Catalunya (Cataluña),80+,42073
+17,GI,Girona (Gerona),CT,Catalunya (Cataluña),total,786596
+18,GR,Granada,AN,Andalucía,0s,82011
+18,GR,Granada,AN,Andalucía,10s,101444
+18,GR,Granada,AN,Andalucía,20s,104268
+18,GR,Granada,AN,Andalucía,30s,120043
+18,GR,Granada,AN,Andalucía,40s,144795
+18,GR,Granada,AN,Andalucía,50s,140645
+18,GR,Granada,AN,Andalucía,60s,106219
+18,GR,Granada,AN,Andalucía,70s,71288
+18,GR,Granada,AN,Andalucía,80+,50625
+18,GR,Granada,AN,Andalucía,total,921338
+19,GU,Guadalajara,CM,Castilla-La Mancha,0s,26184
+19,GU,Guadalajara,CM,Castilla-La Mancha,10s,30834
+19,GU,Guadalajara,CM,Castilla-La Mancha,20s,27069
+19,GU,Guadalajara,CM,Castilla-La Mancha,30s,34898
+19,GU,Guadalajara,CM,Castilla-La Mancha,40s,48385
+19,GU,Guadalajara,CM,Castilla-La Mancha,50s,39881
+19,GU,Guadalajara,CM,Castilla-La Mancha,60s,27140
+19,GU,Guadalajara,CM,Castilla-La Mancha,70s,16743
+19,GU,Guadalajara,CM,Castilla-La Mancha,80+,14454
+19,GU,Guadalajara,CM,Castilla-La Mancha,total,265588
+20,SS,Gipuzkoa(Guipúzcoa),PV,País Vasco/Euskadi,0s,62087
+20,SS,Gipuzkoa(Guipúzcoa),PV,País Vasco/Euskadi,10s,74514
+20,SS,Gipuzkoa(Guipúzcoa),PV,País Vasco/Euskadi,20s,69581
+20,SS,Gipuzkoa(Guipúzcoa),PV,País Vasco/Euskadi,30s,80198
+20,SS,Gipuzkoa(Guipúzcoa),PV,País Vasco/Euskadi,40s,115808
+20,SS,Gipuzkoa(Guipúzcoa),PV,País Vasco/Euskadi,50s,109510
+20,SS,Gipuzkoa(Guipúzcoa),PV,País Vasco/Euskadi,60s,91628
+20,SS,Gipuzkoa(Guipúzcoa),PV,País Vasco/Euskadi,70s,71711
+20,SS,Gipuzkoa(Guipúzcoa),PV,País Vasco/Euskadi,80+,50996
+20,SS,Gipuzkoa(Guipúzcoa),PV,País Vasco/Euskadi,total,726033
+21,H,Huelva,AN,Andalucía,0s,48342
+21,H,Huelva,AN,Andalucía,10s,58344
+21,H,Huelva,AN,Andalucía,20s,57227
+21,H,Huelva,AN,Andalucía,30s,71165
+21,H,Huelva,AN,Andalucía,40s,90121
+21,H,Huelva,AN,Andalucía,50s,78706
+21,H,Huelva,AN,Andalucía,60s,56876
+21,H,Huelva,AN,Andalucía,70s,39479
+21,H,Huelva,AN,Andalucía,80+,25575
+21,H,Huelva,AN,Andalucía,total,525835
+22,HU,Huesca,AR,Aragón,0s,18903
+22,HU,Huesca,AR,Aragón,10s,21431
+22,HU,Huesca,AR,Aragón,20s,22069
+22,HU,Huesca,AR,Aragón,30s,26705
+22,HU,Huesca,AR,Aragón,40s,35606
+22,HU,Huesca,AR,Aragón,50s,34050
+22,HU,Huesca,AR,Aragón,60s,27655
+22,HU,Huesca,AR,Aragón,70s,19903
+22,HU,Huesca,AR,Aragón,80+,17942
+22,HU,Huesca,AR,Aragón,total,224264
+23,J,Jaén,AN,Andalucía,0s,52304
+23,J,Jaén,AN,Andalucía,10s,66585
+23,J,Jaén,AN,Andalucía,20s,73511
+23,J,Jaén,AN,Andalucía,30s,77325
+23,J,Jaén,AN,Andalucía,40s,91338
+23,J,Jaén,AN,Andalucía,50s,99703
+23,J,Jaén,AN,Andalucía,60s,75403
+23,J,Jaén,AN,Andalucía,70s,49049
+23,J,Jaén,AN,Andalucía,80+,41972
+23,J,Jaén,AN,Andalucía,total,627190
+24,LE,León,CL,Castilla y León,0s,28748
+24,LE,León,CL,Castilla y León,10s,35874
+24,LE,León,CL,Castilla y León,20s,37123
+24,LE,León,CL,Castilla y León,30s,48778
+24,LE,León,CL,Castilla y León,40s,66966
+24,LE,León,CL,Castilla y León,50s,73410
+24,LE,León,CL,Castilla y León,60s,65623
+24,LE,León,CL,Castilla y León,70s,48317
+24,LE,León,CL,Castilla y León,80+,46867
+24,LE,León,CL,Castilla y León,total,451706
+25,L,Lleida (Lérida),CT,Catalunya (Cataluña),0s,40562
+25,L,Lleida (Lérida),CT,Catalunya (Cataluña),10s,46755
+25,L,Lleida (Lérida),CT,Catalunya (Cataluña),20s,46100
+25,L,Lleida (Lérida),CT,Catalunya (Cataluña),30s,54835
+25,L,Lleida (Lérida),CT,Catalunya (Cataluña),40s,73162
+25,L,Lleida (Lérida),CT,Catalunya (Cataluña),50s,65212
+25,L,Lleida (Lérida),CT,Catalunya (Cataluña),60s,49570
+25,L,Lleida (Lérida),CT,Catalunya (Cataluña),70s,35095
+25,L,Lleida (Lérida),CT,Catalunya (Cataluña),80+,28436
+25,L,Lleida (Lérida),CT,Catalunya (Cataluña),total,439727
+26,LO,La Rioja,RI,La Rioja,0s,28326
+26,LO,La Rioja,RI,La Rioja,10s,32812
+26,LO,La Rioja,RI,La Rioja,20s,30495
+26,LO,La Rioja,RI,La Rioja,30s,38084
+26,LO,La Rioja,RI,La Rioja,40s,52868
+26,LO,La Rioja,RI,La Rioja,50s,47994
+26,LO,La Rioja,RI,La Rioja,60s,38766
+26,LO,La Rioja,RI,La Rioja,70s,28221
+26,LO,La Rioja,RI,La Rioja,80+,22230
+26,LO,La Rioja,RI,La Rioja,total,319796
+27,LU,Lugo (Lugo),GA,Galicia (Galicia),0s,20952
+27,LU,Lugo (Lugo),GA,Galicia (Galicia),10s,22989
+27,LU,Lugo (Lugo),GA,Galicia (Galicia),20s,25812
+27,LU,Lugo (Lugo),GA,Galicia (Galicia),30s,36673
+27,LU,Lugo (Lugo),GA,Galicia (Galicia),40s,48536
+27,LU,Lugo (Lugo),GA,Galicia (Galicia),50s,50205
+27,LU,Lugo (Lugo),GA,Galicia (Galicia),60s,45651
+27,LU,Lugo (Lugo),GA,Galicia (Galicia),70s,37406
+27,LU,Lugo (Lugo),GA,Galicia (Galicia),80+,37789
+27,LU,Lugo (Lugo),GA,Galicia (Galicia),total,326013
+28,M,Madrid,MD,"Madrid, Comunidad de",0s,629528
+28,M,Madrid,MD,"Madrid, Comunidad de",10s,707402
+28,M,Madrid,MD,"Madrid, Comunidad de",20s,740590
+28,M,Madrid,MD,"Madrid, Comunidad de",30s,920147
+28,M,Madrid,MD,"Madrid, Comunidad de",40s,1159083
+28,M,Madrid,MD,"Madrid, Comunidad de",50s,986463
+28,M,Madrid,MD,"Madrid, Comunidad de",60s,717447
+28,M,Madrid,MD,"Madrid, Comunidad de",70s,524216
+28,M,Madrid,MD,"Madrid, Comunidad de",80+,366375
+28,M,Madrid,MD,"Madrid, Comunidad de",total,6751251
+29,MA,Málaga,AN,Andalucía,0s,157339
+29,MA,Málaga,AN,Andalucía,10s,188196
+29,MA,Málaga,AN,Andalucía,20s,175859
+29,MA,Málaga,AN,Andalucía,30s,226545
+29,MA,Málaga,AN,Andalucía,40s,285292
+29,MA,Málaga,AN,Andalucía,50s,255313
+29,MA,Málaga,AN,Andalucía,60s,192555
+29,MA,Málaga,AN,Andalucía,70s,136470
+29,MA,Málaga,AN,Andalucía,80+,78082
+29,MA,Málaga,AN,Andalucía,total,1695651
+30,MU,Murcia,MC,"Murcia, Región de",0s,159504
+30,MU,Murcia,MC,"Murcia, Región de",10s,181481
+30,MU,Murcia,MC,"Murcia, Región de",20s,172807
+30,MU,Murcia,MC,"Murcia, Región de",30s,202714
+30,MU,Murcia,MC,"Murcia, Región de",40s,255564
+30,MU,Murcia,MC,"Murcia, Región de",50s,218363
+30,MU,Murcia,MC,"Murcia, Región de",60s,153206
+30,MU,Murcia,MC,"Murcia, Región de",70s,102903
+30,MU,Murcia,MC,"Murcia, Región de",80+,71944
+30,MU,Murcia,MC,"Murcia, Región de",total,1518486
+32,OR,Ourense (Orense),GA,Galicia (Galicia),0s,18360
+32,OR,Ourense (Orense),GA,Galicia (Galicia),10s,22266
+32,OR,Ourense (Orense),GA,Galicia (Galicia),20s,24303
+32,OR,Ourense (Orense),GA,Galicia (Galicia),30s,32135
+32,OR,Ourense (Orense),GA,Galicia (Galicia),40s,44103
+32,OR,Ourense (Orense),GA,Galicia (Galicia),50s,45284
+32,OR,Ourense (Orense),GA,Galicia (Galicia),60s,42574
+32,OR,Ourense (Orense),GA,Galicia (Galicia),70s,39354
+32,OR,Ourense (Orense),GA,Galicia (Galicia),80+,36844
+32,OR,Ourense (Orense),GA,Galicia (Galicia),total,305223
+33,O,Asturias,AS,"Asturias, Principado de",0s,65156
+33,O,Asturias,AS,"Asturias, Principado de",10s,81497
+33,O,Asturias,AS,"Asturias, Principado de",20s,78568
+33,O,Asturias,AS,"Asturias, Principado de",30s,108665
+33,O,Asturias,AS,"Asturias, Principado de",40s,166015
+33,O,Asturias,AS,"Asturias, Principado de",50s,161827
+33,O,Asturias,AS,"Asturias, Principado de",60s,151949
+33,O,Asturias,AS,"Asturias, Principado de",70s,111819
+33,O,Asturias,AS,"Asturias, Principado de",80+,86296
+33,O,Asturias,AS,"Asturias, Principado de",total,1011792
+34,P,Palencia,CL,Castilla y León,0s,11215
+34,P,Palencia,CL,Castilla y León,10s,12916
+34,P,Palencia,CL,Castilla y León,20s,13822
+34,P,Palencia,CL,Castilla y León,30s,17528
+34,P,Palencia,CL,Castilla y León,40s,23018
+34,P,Palencia,CL,Castilla y León,50s,25835
+34,P,Palencia,CL,Castilla y León,60s,24113
+34,P,Palencia,CL,Castilla y León,70s,16463
+34,P,Palencia,CL,Castilla y León,80+,14213
+34,P,Palencia,CL,Castilla y León,total,159123
+35,GC,Las Palmas,CN,Canarias,0s,85986
+35,GC,Las Palmas,CN,Canarias,10s,116982
+35,GC,Las Palmas,CN,Canarias,20s,131118
+35,GC,Las Palmas,CN,Canarias,30s,157944
+35,GC,Las Palmas,CN,Canarias,40s,200612
+35,GC,Las Palmas,CN,Canarias,50s,189224
+35,GC,Las Palmas,CN,Canarias,60s,124571
+35,GC,Las Palmas,CN,Canarias,70s,78079
+35,GC,Las Palmas,CN,Canarias,80+,44023
+35,GC,Las Palmas,CN,Canarias,total,1128539
+36,PO,Pontevedra (Pontevedra),GA,Galicia (Galicia),0s,71554
+36,PO,Pontevedra (Pontevedra),GA,Galicia (Galicia),10s,88351
+36,PO,Pontevedra (Pontevedra),GA,Galicia (Galicia),20s,85217
+36,PO,Pontevedra (Pontevedra),GA,Galicia (Galicia),30s,111554
+36,PO,Pontevedra (Pontevedra),GA,Galicia (Galicia),40s,163154
+36,PO,Pontevedra (Pontevedra),GA,Galicia (Galicia),50s,142400
+36,PO,Pontevedra (Pontevedra),GA,Galicia (Galicia),60s,118527
+36,PO,Pontevedra (Pontevedra),GA,Galicia (Galicia),70s,94382
+36,PO,Pontevedra (Pontevedra),GA,Galicia (Galicia),80+,69136
+36,PO,Pontevedra (Pontevedra),GA,Galicia (Galicia),total,944275
+37,SA,Salamanca,CL,Castilla y León,0s,22361
+37,SA,Salamanca,CL,Castilla y León,10s,28297
+37,SA,Salamanca,CL,Castilla y León,20s,30133
+37,SA,Salamanca,CL,Castilla y León,30s,35221
+37,SA,Salamanca,CL,Castilla y León,40s,46654
+37,SA,Salamanca,CL,Castilla y León,50s,52379
+37,SA,Salamanca,CL,Castilla y León,60s,44324
+37,SA,Salamanca,CL,Castilla y León,70s,34951
+37,SA,Salamanca,CL,Castilla y León,80+,33018
+37,SA,Salamanca,CL,Castilla y León,total,327338
+38,TF,Santa Cruz de Tenerife,CN,Canarias,0s,79349
+38,TF,Santa Cruz de Tenerife,CN,Canarias,10s,102883
+38,TF,Santa Cruz de Tenerife,CN,Canarias,20s,117457
+38,TF,Santa Cruz de Tenerife,CN,Canarias,30s,144010
+38,TF,Santa Cruz de Tenerife,CN,Canarias,40s,182794
+38,TF,Santa Cruz de Tenerife,CN,Canarias,50s,169272
+38,TF,Santa Cruz de Tenerife,CN,Canarias,60s,119086
+38,TF,Santa Cruz de Tenerife,CN,Canarias,70s,80221
+38,TF,Santa Cruz de Tenerife,CN,Canarias,80+,49333
+38,TF,Santa Cruz de Tenerife,CN,Canarias,total,1044405
+39,S,Cantabria,CB,Cantabria,0s,45086
+39,S,Cantabria,CB,Cantabria,10s,56642
+39,S,Cantabria,CB,Cantabria,20s,50838
+39,S,Cantabria,CB,Cantabria,30s,67802
+39,S,Cantabria,CB,Cantabria,40s,98034
+39,S,Cantabria,CB,Cantabria,50s,91022
+39,S,Cantabria,CB,Cantabria,60s,79286
+39,S,Cantabria,CB,Cantabria,70s,54795
+39,S,Cantabria,CB,Cantabria,80+,41002
+39,S,Cantabria,CB,Cantabria,total,584507
+40,SG,Segovia,CL,Castilla y León,0s,12163
+40,SG,Segovia,CL,Castilla y León,10s,14880
+40,SG,Segovia,CL,Castilla y León,20s,15257
+40,SG,Segovia,CL,Castilla y León,30s,17373
+40,SG,Segovia,CL,Castilla y León,40s,23361
+40,SG,Segovia,CL,Castilla y León,50s,25025
+40,SG,Segovia,CL,Castilla y León,60s,19325
+40,SG,Segovia,CL,Castilla y León,70s,13374
+40,SG,Segovia,CL,Castilla y León,80+,12905
+40,SG,Segovia,CL,Castilla y León,total,153663
+41,SE,Sevilla,AN,Andalucía,0s,189055
+41,SE,Sevilla,AN,Andalucía,10s,229884
+41,SE,Sevilla,AN,Andalucía,20s,210596
+41,SE,Sevilla,AN,Andalucía,30s,250462
+41,SE,Sevilla,AN,Andalucía,40s,328954
+41,SE,Sevilla,AN,Andalucía,50s,291939
+41,SE,Sevilla,AN,Andalucía,60s,209438
+41,SE,Sevilla,AN,Andalucía,70s,146889
+41,SE,Sevilla,AN,Andalucía,80+,90635
+41,SE,Sevilla,AN,Andalucía,total,1947852
+42,SO,Soria,CL,Castilla y León,0s,6712
+42,SO,Soria,CL,Castilla y León,10s,7958
+42,SO,Soria,CL,Castilla y León,20s,8501
+42,SO,Soria,CL,Castilla y León,30s,9734
+42,SO,Soria,CL,Castilla y León,40s,12758
+42,SO,Soria,CL,Castilla y León,50s,14204
+42,SO,Soria,CL,Castilla y León,60s,11418
+42,SO,Soria,CL,Castilla y León,70s,8499
+42,SO,Soria,CL,Castilla y León,80+,8963
+42,SO,Soria,CL,Castilla y León,total,88747
+43,T,Tarragona (Tarragona),CT,Catalunya (Cataluña),0s,77391
+43,T,Tarragona (Tarragona),CT,Catalunya (Cataluña),10s,92168
+43,T,Tarragona (Tarragona),CT,Catalunya (Cataluña),20s,83495
+43,T,Tarragona (Tarragona),CT,Catalunya (Cataluña),30s,102338
+43,T,Tarragona (Tarragona),CT,Catalunya (Cataluña),40s,139227
+43,T,Tarragona (Tarragona),CT,Catalunya (Cataluña),50s,118627
+43,T,Tarragona (Tarragona),CT,Catalunya (Cataluña),60s,94319
+43,T,Tarragona (Tarragona),CT,Catalunya (Cataluña),70s,68286
+43,T,Tarragona (Tarragona),CT,Catalunya (Cataluña),80+,46458
+43,T,Tarragona (Tarragona),CT,Catalunya (Cataluña),total,822309
+44,TE,Teruel,AR,Aragón,0s,10971
+44,TE,Teruel,AR,Aragón,10s,12456
+44,TE,Teruel,AR,Aragón,20s,13354
+44,TE,Teruel,AR,Aragón,30s,15732
+44,TE,Teruel,AR,Aragón,40s,19476
+44,TE,Teruel,AR,Aragón,50s,20837
+44,TE,Teruel,AR,Aragón,60s,17192
+44,TE,Teruel,AR,Aragón,70s,12032
+44,TE,Teruel,AR,Aragón,80+,12495
+44,TE,Teruel,AR,Aragón,total,134545
+45,TO,Toledo,CM,Castilla-La Mancha,0s,69599
+45,TO,Toledo,CM,Castilla-La Mancha,10s,81285
+45,TO,Toledo,CM,Castilla-La Mancha,20s,73881
+45,TO,Toledo,CM,Castilla-La Mancha,30s,92155
+45,TO,Toledo,CM,Castilla-La Mancha,40s,120057
+45,TO,Toledo,CM,Castilla-La Mancha,50s,103016
+45,TO,Toledo,CM,Castilla-La Mancha,60s,75366
+45,TO,Toledo,CM,Castilla-La Mancha,70s,51639
+45,TO,Toledo,CM,Castilla-La Mancha,80+,42405
+45,TO,Toledo,CM,Castilla-La Mancha,total,709403
+46,V,Valencia/València,VC,"Valenciana, Comunidad/Valenciana, Comunitat",0s,225273
+46,V,Valencia/València,VC,"Valenciana, Comunidad/Valenciana, Comunitat",10s,277689
+46,V,Valencia/València,VC,"Valenciana, Comunidad/Valenciana, Comunitat",20s,266864
+46,V,Valencia/València,VC,"Valenciana, Comunidad/Valenciana, Comunitat",30s,320680
+46,V,Valencia/València,VC,"Valenciana, Comunidad/Valenciana, Comunitat",40s,440694
+46,V,Valencia/València,VC,"Valenciana, Comunidad/Valenciana, Comunitat",50s,391245
+46,V,Valencia/València,VC,"Valenciana, Comunidad/Valenciana, Comunitat",60s,300928
+46,V,Valencia/València,VC,"Valenciana, Comunidad/Valenciana, Comunitat",70s,216787
+46,V,Valencia/València,VC,"Valenciana, Comunidad/Valenciana, Comunitat",80+,149152
+46,V,Valencia/València,VC,"Valenciana, Comunidad/Valenciana, Comunitat",total,2589312
+47,VA,Valladolid,CL,Castilla y León,0s,40894
+47,VA,Valladolid,CL,Castilla y León,10s,49451
+47,VA,Valladolid,CL,Castilla y León,20s,45415
+47,VA,Valladolid,CL,Castilla y León,30s,56750
+47,VA,Valladolid,CL,Castilla y León,40s,86422
+47,VA,Valladolid,CL,Castilla y León,50s,81482
+47,VA,Valladolid,CL,Castilla y León,60s,67854
+47,VA,Valladolid,CL,Castilla y León,70s,53556
+47,VA,Valladolid,CL,Castilla y León,80+,37537
+47,VA,Valladolid,CL,Castilla y León,total,519361
+48,BI,Bizkaia(Vizcaya),PV,País Vasco/Euskadi,0s,92016
+48,BI,Bizkaia(Vizcaya),PV,País Vasco/Euskadi,10s,107858
+48,BI,Bizkaia(Vizcaya),PV,País Vasco/Euskadi,20s,104095
+48,BI,Bizkaia(Vizcaya),PV,País Vasco/Euskadi,30s,130866
+48,BI,Bizkaia(Vizcaya),PV,País Vasco/Euskadi,40s,186611
+48,BI,Bizkaia(Vizcaya),PV,País Vasco/Euskadi,50s,180859
+48,BI,Bizkaia(Vizcaya),PV,País Vasco/Euskadi,60s,152429
+48,BI,Bizkaia(Vizcaya),PV,País Vasco/Euskadi,70s,113018
+48,BI,Bizkaia(Vizcaya),PV,País Vasco/Euskadi,80+,86582
+48,BI,Bizkaia(Vizcaya),PV,País Vasco/Euskadi,total,1154334
+49,ZA,Zamora,CL,Castilla y León,0s,9497
+49,ZA,Zamora,CL,Castilla y León,10s,12190
+49,ZA,Zamora,CL,Castilla y León,20s,13851
+49,ZA,Zamora,CL,Castilla y León,30s,17105
+49,ZA,Zamora,CL,Castilla y León,40s,23185
+49,ZA,Zamora,CL,Castilla y León,50s,26901
+49,ZA,Zamora,CL,Castilla y León,60s,24795
+49,ZA,Zamora,CL,Castilla y León,70s,20361
+49,ZA,Zamora,CL,Castilla y León,80+,20840
+49,ZA,Zamora,CL,Castilla y León,total,168725
+50,Z,Zaragoza,AR,Aragón,0s,83936
+50,Z,Zaragoza,AR,Aragón,10s,97716
+50,Z,Zaragoza,AR,Aragón,20s,95164
+50,Z,Zaragoza,AR,Aragón,30s,116207
+50,Z,Zaragoza,AR,Aragón,40s,158981
+50,Z,Zaragoza,AR,Aragón,50s,145226
+50,Z,Zaragoza,AR,Aragón,60s,115594
+50,Z,Zaragoza,AR,Aragón,70s,87450
+50,Z,Zaragoza,AR,Aragón,80+,67178
+50,Z,Zaragoza,AR,Aragón,total,967452
+51,CE,Ceuta,CE,Ceuta,0s,9978
+51,CE,Ceuta,CE,Ceuta,10s,11788
+51,CE,Ceuta,CE,Ceuta,20s,10904
+51,CE,Ceuta,CE,Ceuta,30s,11557
+51,CE,Ceuta,CE,Ceuta,40s,12583
+51,CE,Ceuta,CE,Ceuta,50s,11531
+51,CE,Ceuta,CE,Ceuta,60s,8231
+51,CE,Ceuta,CE,Ceuta,70s,4307
+51,CE,Ceuta,CE,Ceuta,80+,2638
+51,CE,Ceuta,CE,Ceuta,total,83517
+52,ML,Melilla,ML,Melilla,0s,12823
+52,ML,Melilla,ML,Melilla,10s,12331
+52,ML,Melilla,ML,Melilla,20s,11961
+52,ML,Melilla,ML,Melilla,30s,11711
+52,ML,Melilla,ML,Melilla,40s,12020
+52,ML,Melilla,ML,Melilla,50s,11148
+52,ML,Melilla,ML,Melilla,60s,8179
+52,ML,Melilla,ML,Melilla,70s,3745
+52,ML,Melilla,ML,Melilla,80+,2343
+52,ML,Melilla,ML,Melilla,total,86261

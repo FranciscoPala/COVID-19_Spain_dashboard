@@ -1,0 +1,53 @@
+codigoProvincia,nombreProvincia,codigoCCAA,nombreCCAA,codigoINE
+C,A Coruña (La Coruña),GA,Galicia (Galicia),15
+VI,Araba/Álava,PV,País Vasco/Euskadi,1
+AB,Albacete,CM,Castilla-La Mancha,2
+A,Alicante/Alacant,VC,"Valenciana, Comunidad/Valenciana, Comunitat",3
+AL,Almería,AN,Andalucía,4
+O,Asturias,AS,"Asturias, Principado de",33
+AV,Ávila,CL,Castilla y León,5
+BA,Badajoz,EX,Extremadura,6
+PM,Balears (Baleares),IB,Illes Balears (Islas Baleares),7
+B,Barcelona (Barcelona),CT,Catalunya (Cataluña),8
+BI,Bizkaia(Vizcaya),PV,País Vasco/Euskadi,48
+BU,Burgos,CL,Castilla y León,9
+CC,Cáceres,EX,Extremadura,10
+CA,Cádiz,AN,Andalucía,11
+S,Cantabria,CB,Cantabria,39
+CS,Castellón/Castelló,VC,"Valenciana, Comunidad/Valenciana, Comunitat",12
+CR,Ciudad Real,CM,Castilla-La Mancha,13
+CO,Córdoba,AN,Andalucía,14
+CU,Cuenca,CM,Castilla-La Mancha,16
+SS,Gipuzkoa(Guipúzcoa),PV,País Vasco/Euskadi,20
+GI,Girona (Gerona),CT,Catalunya (Cataluña),17
+GR,Granada,AN,Andalucía,18
+GU,Guadalajara,CM,Castilla-La Mancha,19
+H,Huelva,AN,Andalucía,21
+HU,Huesca,AR,Aragón,22
+J,Jaén,AN,Andalucía,23
+LO,La Rioja,RI,La Rioja,26
+GC,Las Palmas,CN,Canarias,35
+LE,León,CL,Castilla y León,24
+L,Lleida (Lérida),CT,Catalunya (Cataluña),25
+LU,Lugo (Lugo),GA,Galicia (Galicia),27
+M,Madrid,MD,"Madrid, Comunidad de",28
+MA,Málaga,AN,Andalucía,29
+MU,Murcia,MC,"Murcia, Región de",30
+,Navarra/Nafarroa,NC,"Navarra, Comunidad Foral de/Nafarroako Foru Komunitatea",31
+OR,Ourense (Orense),GA,Galicia (Galicia),32
+P,Palencia,CL,Castilla y León,34
+PO,Pontevedra (Pontevedra),GA,Galicia (Galicia),36
+SA,Salamanca,CL,Castilla y León,37
+TF,Santa Cruz de Tenerife,CN,Canarias,38
+SG,Segovia,CL,Castilla y León,40
+SE,Sevilla,AN,Andalucía,41
+SO,Soria,CL,Castilla y León,42
+T,Tarragona (Tarragona),CT,Catalunya (Cataluña),43
+TE,Teruel,AR,Aragón,44
+TO,Toledo,CM,Castilla-La Mancha,45
+V,Valencia/València,VC,"Valenciana, Comunidad/Valenciana, Comunitat",46
+VA,Valladolid,CL,Castilla y León,47
+ZA,Zamora,CL,Castilla y León,49
+Z,Zaragoza,AR,Aragón,50
+CE,Ceuta,CE,Ceuta,51
+ML,Melilla,ML,Melilla,52
