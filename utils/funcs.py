@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
+import plotly.express as px
 from scipy.signal import find_peaks
 
 def get_data():
@@ -107,6 +108,24 @@ def get_heatmap_data(data, variable):
         )
     return heatmap_age_wave
 
+def get_heatmap_data_age_norm(data, data_pop, variable):
+    # gby age and wave
+    totals_age_wave = data.groupby(['age', 'wave'], as_index = False).sum()
+    # drop NC age
+    mask = totals_age_wave.age != 'NC'
+    totals_age_wave = totals_age_wave[mask]
+    # crosstab
+    heatmap_wave_age = pd.crosstab(
+        index = totals_age_wave.wave, 
+        columns = totals_age_wave.age, 
+        values = totals_age_wave[variable], 
+        aggfunc=sum,
+        )
+    total_pop = data_pop.groupby('age').population.sum().drop('total')
+    heatmap_wave_age = heatmap_wave_age/total_pop
+    heatmap_wave_age = heatmap_wave_age.T
+    return heatmap_wave_age
+
 
 def plot_heatmap(heatmap_data, barplot_data, variable):
     size_unit=np.array([1.7*1.77, 1])
@@ -150,6 +169,19 @@ def plot_heatmap(heatmap_data, barplot_data, variable):
         padding=7,
         )
     # titles
-    ax[0].set_title('Distribution of {} Within Wave by Age'.format(variable.capitalize()))
+    ax[0].set_title('Within-Wave Distribution of {} by Age'.format(variable.capitalize()))
     ax[1].set_title('Total {} by Wave'.format(variable.capitalize()))
     return fig
+
+def plot_lineplot(data, variable):
+    fig = px.line(
+        data, 
+        x="date",
+        y=variable, 
+        color='age',
+        template = 'simple_white',
+        width=1600,
+        height=500,
+        title = '7-day Simple Moving Average of {}'.format(variable.capitalize()))
+    return fig
+
