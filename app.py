@@ -174,16 +174,17 @@ if rad == "Hospitalizations":
 
     # heatmap + totals by age section
     st.write("""
-    ## Distribution by Wave as Percentage of Total Age Group Population
+    ## Within-Age Distribution by Wave and Total Hospitalizations
     """)
 
     # get data for heatmap and total pop
-    pop_totals = pop.groupby('age').population.sum().drop('total').reset_index()
-    heatmap = get_heatmap_data_age_norm(data,pop, variable='hospitalizations')
+    heatmap = get_heatmap_data_age_norm(data, variable='hospitalizations')
+    totals_age = data.groupby('age').sum().drop('NC').reset_index()
+
     # plot population heatmap + barplot
     fig = plot_heatmap_pop(
         heatmap_data=heatmap, 
-        barplot_data=pop_totals, 
+        barplot_data=totals_age, 
         variable='hospitalizations')
 
     # save to image and 
@@ -228,6 +229,26 @@ if rad == "ICU Admissions":
     fig.savefig(buf, format="png")
     st.image(buf)
 
+    # heatmap + totals by age section
+    st.write("""
+    ## Within-Age Distribution by Wave and Total ICU Admissions
+    """)
+
+    # get data for heatmap and total pop
+    heatmap = get_heatmap_data_age_norm(data, variable='icu')
+    totals_age = data.groupby('age').sum().drop('NC').reset_index()
+
+    # plot population heatmap + barplot
+    fig = plot_heatmap_pop(
+        heatmap_data=heatmap, 
+        barplot_data=totals_age, 
+        variable='icu')
+
+    # save to image and 
+    buf = BytesIO()
+    fig.savefig(buf, format="png")
+    st.image(buf)
+
 ################
 # DEATHS SECTION
 ################
@@ -264,6 +285,33 @@ if rad == "Deaths":
     buf = BytesIO()
     fig.savefig(buf, format="png")
     st.image(buf)
+
+    # heatmap + totals by age section
+    st.write("""
+    ## Within-Age Distribution by Wave and Total Deaths Admissions
+    """)
+
+    # get data for heatmap and total pop
+    heatmap = get_heatmap_data_age_norm(data, variable='deaths')
+    totals_age = data.groupby('age').sum().drop('NC').reset_index()
+
+    # plot population heatmap + barplot
+    fig = plot_heatmap_pop(
+        heatmap_data=heatmap, 
+        barplot_data=totals_age, 
+        variable='deaths')
+
+    # save to image and 
+    buf = BytesIO()
+    fig.savefig(buf, format="png")
+    st.image(buf)
+
+################
+# RATIOS SECTION
+################
+
+if rad == "Raitios":
+    st.write("TODO")
 
 #####################
 # PREDICTIONS SECTION
