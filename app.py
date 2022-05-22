@@ -22,7 +22,6 @@ rad = st.sidebar.radio(
         "Hospitalizations",
         "ICU Admissions",
         "Deaths",
-        "Ratios",
         "Predictions",
     ]
 )
@@ -32,6 +31,7 @@ prov = pd.read_csv(cwd / 'data/provincias.csv')
 ccaa_map = prov.set_index('codigoProvincia').codigoCCAA
 data['autonomousCommunity'] = data.province.str.strip().replace(ccaa_map)
 pop = pd.read_csv(cwd / 'data/population_spain_10s.csv')
+pop_totals = pop.groupby('age').population.sum().drop('total').reset_index()
 
 ##################
 # OVERVIEW SECTION
@@ -70,20 +70,12 @@ if rad== "Overview":
     ### Population Data
     """)
     st.dataframe(pop)
-    pop_totals = pop.groupby('age').population.sum().drop('total').reset_index()
-    # total population barplot
 
 ################
 # CASES SECTION
 ################
 
 if rad == "Cases":
-
-    # Markdown text
-    st.write("""
-    # Cases
-    The purpose of these section is...
-    """)
 
     # ploty cases
     st.write("""
@@ -105,7 +97,7 @@ if rad == "Cases":
     wave_totals = get_wave_totals(data)
 
     # plot heatmap + barplot
-    fig = plot_heatmap(
+    fig = plot_heatmap_wave(
         heatmap_data=heatmap, 
         barplot_data=wave_totals, 
         variable='cases')
@@ -125,7 +117,7 @@ if rad == "Cases":
     totals_age = data.groupby('age').sum().drop('NC').reset_index()
 
     # plot population heatmap + barplot
-    fig = plot_heatmap_pop(
+    fig = plot_heatmap_age(
         heatmap_data=heatmap, 
         barplot_data=totals_age, 
         variable='cases')
@@ -135,16 +127,23 @@ if rad == "Cases":
     fig.savefig(buf, format="png")
     st.image(buf)
 
+    # 1. Heatmap of cases and total pop
+    st.write("""
+    ## Total Cases as % of Total Age Group Population and Total Age Group Population
+    """)
+    heatmap = get_heatmap_data_total_pop_norm(data, pop, 'cases')
+    fig = plot_heatmap_pop(heatmap, pop_totals)
+    buf = BytesIO()
+    fig.savefig(buf, format="png")
+    st.image(buf)
+
+
 ##########################
 # HOSPITALIZATIONS SECTION
 ##########################
 
 if rad == "Hospitalizations":
-    # Markdown text
-    st.write("""
-    # Hospitalizations
-    The purpose of these section is...
-    """)
+
     st.write("""
     ## Daily Hospitalizations By Age
     """)
@@ -162,7 +161,7 @@ if rad == "Hospitalizations":
     wave_totals = get_wave_totals(data)
 
     # plot heatmap + barplot
-    fig = plot_heatmap(
+    fig = plot_heatmap_wave(
         heatmap_data=heatmap, 
         barplot_data=wave_totals, 
         variable='hospitalizations')
@@ -182,7 +181,7 @@ if rad == "Hospitalizations":
     totals_age = data.groupby('age').sum().drop('NC').reset_index()
 
     # plot population heatmap + barplot
-    fig = plot_heatmap_pop(
+    fig = plot_heatmap_age(
         heatmap_data=heatmap, 
         barplot_data=totals_age, 
         variable='hospitalizations')
@@ -192,16 +191,22 @@ if rad == "Hospitalizations":
     fig.savefig(buf, format="png")
     st.image(buf)
 
+    # 2. Heatmap of hosp as % of cases and Hosp as % of pop
+    st.write("""
+    ## Total Hospitalizations as % of Total Cases and as % of total Age-Group Population
+    """)
+    hosp_cases, hosp_total_pop = get_hosp_ratio_data(data, pop)
+    fig = plot_heatmap_ratios_hosp(hosp_cases, hosp_total_pop)
+    buf = BytesIO()
+    fig.savefig(buf, format="png")
+    st.image(buf)
+
 ########################
 # ICU ADMISSIONS SECTION
 ########################
 
 if rad == "ICU Admissions":
-    # Markdown text
-    st.write("""
-    # ICU
-    The purpose of these section is...
-    """)
+
     st.write("""
     ## Daily ICU By Age
     """)
@@ -219,7 +224,7 @@ if rad == "ICU Admissions":
     wave_totals = get_wave_totals(data)
 
     # plot heatmap + barplot
-    fig = plot_heatmap(
+    fig = plot_heatmap_wave(
         heatmap_data=heatmap, 
         barplot_data=wave_totals, 
         variable='icu')
@@ -239,7 +244,7 @@ if rad == "ICU Admissions":
     totals_age = data.groupby('age').sum().drop('NC').reset_index()
 
     # plot population heatmap + barplot
-    fig = plot_heatmap_pop(
+    fig = plot_heatmap_age(
         heatmap_data=heatmap, 
         barplot_data=totals_age, 
         variable='icu')
@@ -249,16 +254,22 @@ if rad == "ICU Admissions":
     fig.savefig(buf, format="png")
     st.image(buf)
 
+    # 3. Heatmap of ICU as % of Hosp and ICU as % of pop
+    st.write("""
+    ## Total ICU Admissions as % of Total Hospitalizations as % of total Age-Group Population
+    """)
+    icu_hosp, icu_total_pop = get_icu_ratio_data(data, pop)
+    fig = plot_heatmap_ratios_icu(icu_hosp, icu_total_pop)
+    buf = BytesIO()
+    fig.savefig(buf, format="png")
+    st.image(buf)
+
 ################
 # DEATHS SECTION
 ################
 
 if rad == "Deaths":
-    # Markdown text
-    st.write("""
-    # Deaths
-    The purpose of these section is...
-    """)
+
     st.write("""
     ## Daily Deaths By Age
     """)
@@ -276,19 +287,17 @@ if rad == "Deaths":
     wave_totals = get_wave_totals(data)
 
     # plot heatmap + barplot
-    fig = plot_heatmap(
+    fig = plot_heatmap_wave(
         heatmap_data=heatmap, 
         barplot_data=wave_totals, 
         variable='deaths')
-
-    # save to image and 
     buf = BytesIO()
     fig.savefig(buf, format="png")
     st.image(buf)
 
     # heatmap + totals by age section
     st.write("""
-    ## Within-Age Distribution by Wave and Total Deaths Admissions
+    ## Within-Age Distribution by Wave and Total Deaths
     """)
 
     # get data for heatmap and total pop
@@ -296,7 +305,7 @@ if rad == "Deaths":
     totals_age = data.groupby('age').sum().drop('NC').reset_index()
 
     # plot population heatmap + barplot
-    fig = plot_heatmap_pop(
+    fig = plot_heatmap_age(
         heatmap_data=heatmap, 
         barplot_data=totals_age, 
         variable='deaths')
@@ -305,13 +314,16 @@ if rad == "Deaths":
     buf = BytesIO()
     fig.savefig(buf, format="png")
     st.image(buf)
-
-################
-# RATIOS SECTION
-################
-
-if rad == "Raitios":
-    st.write("TODO")
+    
+    # Heatmap of Deaths as % of ICU and Hosp as % of pop
+    st.write("""
+    ## Total Deaths as % of Total ICU Admissions as % of total Age-Group Population
+    """)
+    deaths_icu, deaths_total_pop = get_deaths_ratio_data(data, pop)
+    fig = plot_heatmap_ratios_deaths(deaths_icu, deaths_total_pop)
+    buf = BytesIO()
+    fig.savefig(buf, format="png")
+    st.image(buf)
 
 #####################
 # PREDICTIONS SECTION
