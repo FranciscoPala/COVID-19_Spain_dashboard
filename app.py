@@ -22,6 +22,7 @@ rad = st.sidebar.radio(
         "Hospitalizations",
         "ICU Admissions",
         "Deaths",
+        "Ratios",
         "Predictions",
     ]
 )
@@ -31,7 +32,11 @@ prov = pd.read_csv(cwd / 'data/provincias.csv')
 ccaa_map = prov.set_index('codigoProvincia').codigoCCAA
 data['autonomousCommunity'] = data.province.str.strip().replace(ccaa_map)
 pop = pd.read_csv(cwd / 'data/population_spain_10s.csv')
-# Overview Page
+
+##################
+# OVERVIEW SECTION
+##################
+
 if rad== "Overview":
     st.markdown("""
     # Covid-19 Dashboard For Spain
@@ -59,12 +64,19 @@ if rad== "Overview":
     ### Covid Data
     """)
     st.dataframe(data)
+    # wave barplot
+
     st.markdown("""
     ### Population Data
     """)
     st.dataframe(pop)
+    pop_totals = pop.groupby('age').population.sum().drop('total').reset_index()
+    # total population barplot
 
-# Cases
+################
+# CASES SECTION
+################
+
 if rad == "Cases":
 
     # Markdown text
@@ -89,7 +101,7 @@ if rad == "Cases":
     """)
 
     # get data for heatmap and wave totals
-    heatmap = get_heatmap_data(data, variable='cases')
+    heatmap = get_heatmap_data_wave_norm(data, variable='cases')
     wave_totals = get_wave_totals(data)
 
     # plot heatmap + barplot
@@ -105,23 +117,27 @@ if rad == "Cases":
 
     # heatmap + totals by age section
     st.write("""
-    ## Distribution by Wave as Percentage of Total Age Group Population
+    ## Within-Age Distribution by Wave and Total Cases
     """)
 
-    # get data for heatmap and wave totals
-    heatmap = get_heatmap_data_age_norm(data,pop, variable='cases')
-    wave_totals = get_wave_totals(data)
+    # get data for heatmap and total pop
+    heatmap = get_heatmap_data_age_norm(data, variable='cases')
+    totals_age = data.groupby('age').sum().drop('NC').reset_index()
 
-    # plot heatmap + barplot
-    fig = plot_heatmap(
+    # plot population heatmap + barplot
+    fig = plot_heatmap_pop(
         heatmap_data=heatmap, 
-        barplot_data=wave_totals, 
+        barplot_data=totals_age, 
         variable='cases')
 
     # save to image and 
     buf = BytesIO()
     fig.savefig(buf, format="png")
     st.image(buf)
+
+##########################
+# HOSPITALIZATIONS SECTION
+##########################
 
 if rad == "Hospitalizations":
     # Markdown text
@@ -142,7 +158,7 @@ if rad == "Hospitalizations":
     """)
 
     # get data for heatmap and wave totals
-    heatmap = get_heatmap_data(data, variable='hospitalizations')
+    heatmap = get_heatmap_data_wave_norm(data, variable='hospitalizations')
     wave_totals = get_wave_totals(data)
 
     # plot heatmap + barplot
@@ -155,6 +171,29 @@ if rad == "Hospitalizations":
     buf = BytesIO()
     fig.savefig(buf, format="png")
     st.image(buf)
+
+    # heatmap + totals by age section
+    st.write("""
+    ## Distribution by Wave as Percentage of Total Age Group Population
+    """)
+
+    # get data for heatmap and total pop
+    pop_totals = pop.groupby('age').population.sum().drop('total').reset_index()
+    heatmap = get_heatmap_data_age_norm(data,pop, variable='hospitalizations')
+    # plot population heatmap + barplot
+    fig = plot_heatmap_pop(
+        heatmap_data=heatmap, 
+        barplot_data=pop_totals, 
+        variable='hospitalizations')
+
+    # save to image and 
+    buf = BytesIO()
+    fig.savefig(buf, format="png")
+    st.image(buf)
+
+########################
+# ICU ADMISSIONS SECTION
+########################
 
 if rad == "ICU Admissions":
     # Markdown text
@@ -175,7 +214,7 @@ if rad == "ICU Admissions":
     """)
 
     # get data for heatmap and wave totals
-    heatmap = get_heatmap_data(data, variable='icu')
+    heatmap = get_heatmap_data_wave_norm(data, variable='icu')
     wave_totals = get_wave_totals(data)
 
     # plot heatmap + barplot
@@ -188,6 +227,10 @@ if rad == "ICU Admissions":
     buf = BytesIO()
     fig.savefig(buf, format="png")
     st.image(buf)
+
+################
+# DEATHS SECTION
+################
 
 if rad == "Deaths":
     # Markdown text
@@ -208,7 +251,7 @@ if rad == "Deaths":
     """)
 
     # get data for heatmap and wave totals
-    heatmap = get_heatmap_data(data, variable='deaths')
+    heatmap = get_heatmap_data_wave_norm(data, variable='deaths')
     wave_totals = get_wave_totals(data)
 
     # plot heatmap + barplot
@@ -221,6 +264,10 @@ if rad == "Deaths":
     buf = BytesIO()
     fig.savefig(buf, format="png")
     st.image(buf)
+
+#####################
+# PREDICTIONS SECTION
+#####################
 
 if rad == "Predictions":
     st.write("TODO")
