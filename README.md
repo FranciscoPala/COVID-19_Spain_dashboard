@@ -13,7 +13,7 @@ The app is deployed in **streamlit**, and it consists of several sections.
 ### Hospitalization Section
 - The same first 3 plots as in the cases section for the hospitalization variable
 - A heatmap of **Hospitalizations as % of Total Cases** by wave and a heatmap of **Hospitalizations as % of Total Age Group Population**
-# ICU Admissions Section
+### ICU Admissions Section
 - The same first 3 plots as in the cases section for the ICU admissions variable
 - A heatmap of **ICU Admissions as % of Hospitalizations** by wave and age group and a heatmap of **ICU Admissions as % of Total Age Group Population**
 ### Deaths Section 
