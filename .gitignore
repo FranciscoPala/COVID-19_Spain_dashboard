@@ -1,0 +1,10 @@
+vars.env
+share/**
+Scripts
+Lib
+site-packages
+Include
+etc
+jupyter
+nbconfig
+notebook.d

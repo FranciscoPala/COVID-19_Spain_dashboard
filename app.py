@@ -22,7 +22,6 @@ rad = st.sidebar.radio(
         "Hospitalizations",
         "ICU Admissions",
         "Deaths",
-        "Predictions",
     ]
 )
 # read csv to process
@@ -60,10 +59,12 @@ if rad== "Overview":
     prov = pd.read_csv(cwd / 'data/provincias.csv')
     ccaa_map = prov.set_index('codigoProvincia').codigoCCAA
     data['autonomousCommunity'] = data.province.str.strip().replace(ccaa_map)
+    st.write("Last Update: {}".format(data.date.max()))
     st.markdown("""
     ### Covid Data
     """)
-    st.dataframe(data)
+    st.dataframe(data.sort_values('date', ascending=False))
+
     # wave barplot
 
     st.markdown("""
@@ -193,7 +194,7 @@ if rad == "Hospitalizations":
 
     # 2. Heatmap of hosp as % of cases and Hosp as % of pop
     st.write("""
-    ## Total Hospitalizations as % of Total Cases and as % of total Age-Group Population
+    ## Total Hospitalizations as % of Total Cases & as % of total Age-Group Population
     """)
     hosp_cases, hosp_total_pop = get_hosp_ratio_data(data, pop)
     fig = plot_heatmap_ratios_hosp(hosp_cases, hosp_total_pop)
@@ -256,7 +257,7 @@ if rad == "ICU Admissions":
 
     # 3. Heatmap of ICU as % of Hosp and ICU as % of pop
     st.write("""
-    ## Total ICU Admissions as % of Total Hospitalizations as % of total Age-Group Population
+    ## Total ICU Admissions as % of Total Hospitalizations & as % of total Age-Group Population
     """)
     icu_hosp, icu_total_pop = get_icu_ratio_data(data, pop)
     fig = plot_heatmap_ratios_icu(icu_hosp, icu_total_pop)
@@ -317,7 +318,7 @@ if rad == "Deaths":
     
     # Heatmap of Deaths as % of ICU and Hosp as % of pop
     st.write("""
-    ## Total Deaths as % of Total ICU Admissions as % of total Age-Group Population
+    ## Total Deaths as % of Total ICU Admissions & as % of total Age-Group Population
     """)
     deaths_icu, deaths_total_pop = get_deaths_ratio_data(data, pop)
     fig = plot_heatmap_ratios_deaths(deaths_icu, deaths_total_pop)
@@ -328,6 +329,3 @@ if rad == "Deaths":
 #####################
 # PREDICTIONS SECTION
 #####################
-
-if rad == "Predictions":
-    st.write("TODO")
