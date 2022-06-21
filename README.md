@@ -1,7 +1,7 @@
 # Covid-19 Dashboard for Spain
 ## Deployment
 ### AWS
-<a href="https://ec2-34-244-246-110.eu-west-1.compute.amazonaws.com:8501">Link to the App</a>
+<a href="https://ec2-34-244-246-110.eu-west-1.compute.amazonaws.com:8501" target=”_blank” >Link to the App</a>
 1. The app was deployed via AWS ECS by building the Docker image and pushing it to AWS ECR. The EC2 Cluster consisted of one t2.medium instance and a single task was defined which consists in deploying a container from the ECR image.
 ### Locally 
 2. To deploy the app locally navigate to a directory on your local machine and run
