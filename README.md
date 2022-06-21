@@ -30,3 +30,10 @@ I decided to start working on this project on the summer of 2021, when the 5th w
 ### Deaths Section 
 1. The same first 3 plots as in the cases section for the deaths variable
 1. A heatmap of **Deaths as % of ICU Admissions** by wave and age group a heatmap of **Deaths as % of Total Age Group Population**
+
+## Future Developements
+1. Refactor app.py so that its less computationally intensive:
+   1. Instead of updating the dataset on demand, create a pipeline which executes daily, updates the data and generates the wave variable. Use a task scheduler and add its CMD to the Dockerfile
+   2. Make it so that the images are saved locally on the container (make a /fig directory and save the figures there) as opposed to 
+2. Add filters for province and sex
+3. Add ARIMA predictions
