@@ -3,7 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import pathlib
-from utils.funcs import *
+from utils.app_funcs import *
 from io import BytesIO
 
 # set cwd

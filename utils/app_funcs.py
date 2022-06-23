@@ -6,8 +6,13 @@ import plotly.express as px
 from scipy.signal import find_peaks
 
 
+# added to class DataHandler
 def get_data():
-    # dather from ministry of health and convert dtypes
+    """gathers data from the Spanish Ministry of Health and formats it 
+
+    Returns:
+        data(pd.DataFrame): gathered dataframe with some basic formatting
+    """
     url = 'https://cnecovid.isciii.es/covid19/resources/casos_hosp_uci_def_sexo_edad_provres.csv'
     data = pd.read_csv(url).convert_dtypes()
     data.fecha = pd.to_datetime(data.fecha)
@@ -35,8 +40,8 @@ def get_data():
     data = data.loc[date_mask, :]
     return data
 
-
-def get_sma7(data):
+# Added to class DataHandler
+def get_sma7_gby_date(data):
     by_date = data.groupby('date').agg(
         dailyCases = ('cases', sum),
         dailyHospitalizations = ('hospitalizations', sum),
@@ -45,8 +50,8 @@ def get_sma7(data):
     ).sort_values('date').rolling(7).mean().fillna(0).astype(int).reset_index()
     return by_date
 
-
-def get_sma7_by_age(data):
+# Added to class DataHandler
+def get_sma7_gby_age_date(data):
     by_age = data.groupby(['age', 'date']).agg(
         dailyCases = ('cases', sum),
         dailyHospitalizations = ('hospitalizations', sum),
@@ -62,8 +67,8 @@ def get_sma7_by_age(data):
     return data_out
 
 
-def get_waves(get_sma7, data):
-    daily_totals = get_sma7(data)
+def get_waves(get_sma7_gby_date, data):
+    daily_totals = get_sma7_gby_date(data)
     # get peak indices
     peaks, _ = find_peaks(
         x = daily_totals.dailyCases,
@@ -87,7 +92,7 @@ def get_waves(get_sma7, data):
         include_lowest = True,
         labels = range(1, wave_dates.size)
         )
-    return data
+    return data, peak_dates, valley_dates
 
 
 def get_wave_totals(data):
