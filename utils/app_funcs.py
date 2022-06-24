@@ -6,8 +6,10 @@ import plotly.express as px
 from scipy.signal import find_peaks
 
 
-# added to class DataHandler
-def get_data():
+# GATHERING FUNCTIONS
+######################
+
+def get_data(): # added to class DataHandler
     """gathers data from the Spanish Ministry of Health and formats it 
 
     Returns:
@@ -40,8 +42,11 @@ def get_data():
     data = data.loc[date_mask, :]
     return data
 
-# Added to class DataHandler
-def get_sma7_gby_date(data):
+
+# DATA PROCESSING FUNCTIONS
+############################
+
+def get_sma7_gby_date(data): # Added to class DataHandler
     by_date = data.groupby('date').agg(
         dailyCases = ('cases', sum),
         dailyHospitalizations = ('hospitalizations', sum),
@@ -50,8 +55,8 @@ def get_sma7_gby_date(data):
     ).sort_values('date').rolling(7).mean().fillna(0).astype(int).reset_index()
     return by_date
 
-# Added to class DataHandler
-def get_sma7_gby_age_date(data):
+
+def get_sma7_gby_age_date(data): # Added to class DataHandler
     by_age = data.groupby(['age', 'date']).agg(
         dailyCases = ('cases', sum),
         dailyHospitalizations = ('hospitalizations', sum),
@@ -95,12 +100,7 @@ def get_waves(get_sma7_gby_date, data):
     return data, peak_dates, valley_dates
 
 
-def get_wave_totals(data):
-    totals_wave = data.groupby('wave', as_index=False).sum()
-    return totals_wave
-
-
-def get_heatmap_data_wave_norm(data, variable):
+def get_wave_heatmap_data(data, variable):
     # gby age and wave
     totals_age_wave = data.groupby(['age', 'wave'], as_index = False).sum()
     # drop NC age
@@ -117,7 +117,7 @@ def get_heatmap_data_wave_norm(data, variable):
     return heatmap_age_wave
 
 
-def get_heatmap_data_age_norm(data, variable):
+def get_age_heatmap_data(data, variable):
     # gby age and wave
     totals_age_wave = data.groupby(['age', 'wave'], as_index = False).sum()
     # drop NC age
@@ -133,8 +133,43 @@ def get_heatmap_data_age_norm(data, variable):
         )
     return heatmap_age_wave
 
+def get_hosp_ratio_data(data, pop):
+    totals_age_wave = data.groupby(['age', 'wave'], as_index = False).sum()
+    total_pop = pop.groupby('age').population.sum().drop('total')
+    mask = totals_age_wave.age != 'NC'
+    totals_age_wave = totals_age_wave[mask]
+    cases = pd.crosstab(totals_age_wave.wave, totals_age_wave.age, totals_age_wave.cases, aggfunc=sum)
+    hosp = pd.crosstab(totals_age_wave.wave, totals_age_wave.age, totals_age_wave.hospitalizations, aggfunc=sum)
+    hosp_cases = hosp/cases
+    hosp_total_pop = hosp/total_pop
+    return hosp_cases, hosp_total_pop
 
-def get_heatmap_data_total_pop_norm(data, data_pop, variable):
+
+def get_icu_ratio_data(data, pop):
+    totals_age_wave = data.groupby(['age', 'wave'], as_index = False).sum()
+    total_pop = pop.groupby('age').population.sum().drop('total')
+    mask = totals_age_wave.age != 'NC'
+    totals_age_wave = totals_age_wave[mask]
+    icu = pd.crosstab(totals_age_wave.wave, totals_age_wave.age, totals_age_wave.icu, aggfunc=sum)
+    hosp = pd.crosstab(totals_age_wave.wave, totals_age_wave.age, totals_age_wave.hospitalizations, aggfunc=sum)
+    icu_hosp = icu/hosp
+    icu_total_pop = icu/total_pop
+    return icu_hosp, icu_total_pop
+
+
+def get_deaths_ratio_data(data, pop):
+    totals_age_wave = data.groupby(['age', 'wave'], as_index = False).sum()
+    total_pop = pop.groupby('age').population.sum().drop('total')
+    mask = totals_age_wave.age != 'NC'
+    totals_age_wave = totals_age_wave[mask]
+    deaths = pd.crosstab(totals_age_wave.wave, totals_age_wave.age, totals_age_wave.deaths, aggfunc=sum)
+    icu = pd.crosstab(totals_age_wave.wave, totals_age_wave.age, totals_age_wave.icu, aggfunc=sum)
+    deaths_icu = deaths/icu
+    deaths_total_pop = deaths/total_pop
+    return deaths_icu, deaths_total_pop
+
+
+def get_age_totalpop_norm_heatmap_data(data, data_pop, variable):
     # gby age and wave
     totals_age_wave = data.groupby(['age', 'wave'], as_index = False).sum()
     # drop NC age
@@ -153,7 +188,7 @@ def get_heatmap_data_total_pop_norm(data, data_pop, variable):
     return heatmap_wave_age
 
 
-def plot_heatmap_wave(heatmap_data, barplot_data, variable):
+def plot_wave_heatmap(heatmap_data, barplot_data, variable):
     size_unit=np.array([1.7*1.77, 1])
     fig, ax = plt.subplots(1, 2, figsize=7*size_unit, gridspec_kw={"width_ratios": (.6, .4)})
     fig.subplots_adjust(wspace=0, hspace=0)
@@ -308,40 +343,7 @@ def plot_heatmap_pop(heatmap_data, pop_data):
     return fig
 
 
-def get_hosp_ratio_data(data, pop):
-    totals_age_wave = data.groupby(['age', 'wave'], as_index = False).sum()
-    total_pop = pop.groupby('age').population.sum().drop('total')
-    mask = totals_age_wave.age != 'NC'
-    totals_age_wave = totals_age_wave[mask]
-    cases = pd.crosstab(totals_age_wave.wave, totals_age_wave.age, totals_age_wave.cases, aggfunc=sum)
-    hosp = pd.crosstab(totals_age_wave.wave, totals_age_wave.age, totals_age_wave.hospitalizations, aggfunc=sum)
-    hosp_cases = hosp/cases
-    hosp_total_pop = hosp/total_pop
-    return hosp_cases, hosp_total_pop
 
-
-def get_icu_ratio_data(data, pop):
-    totals_age_wave = data.groupby(['age', 'wave'], as_index = False).sum()
-    total_pop = pop.groupby('age').population.sum().drop('total')
-    mask = totals_age_wave.age != 'NC'
-    totals_age_wave = totals_age_wave[mask]
-    icu = pd.crosstab(totals_age_wave.wave, totals_age_wave.age, totals_age_wave.icu, aggfunc=sum)
-    hosp = pd.crosstab(totals_age_wave.wave, totals_age_wave.age, totals_age_wave.hospitalizations, aggfunc=sum)
-    icu_hosp = icu/hosp
-    icu_total_pop = icu/total_pop
-    return icu_hosp, icu_total_pop
-
-
-def get_deaths_ratio_data(data, pop):
-    totals_age_wave = data.groupby(['age', 'wave'], as_index = False).sum()
-    total_pop = pop.groupby('age').population.sum().drop('total')
-    mask = totals_age_wave.age != 'NC'
-    totals_age_wave = totals_age_wave[mask]
-    deaths = pd.crosstab(totals_age_wave.wave, totals_age_wave.age, totals_age_wave.deaths, aggfunc=sum)
-    icu = pd.crosstab(totals_age_wave.wave, totals_age_wave.age, totals_age_wave.icu, aggfunc=sum)
-    deaths_icu = deaths/icu
-    deaths_total_pop = deaths/total_pop
-    return deaths_icu, deaths_total_pop
 
 
 def plot_heatmap_ratios_hosp(heatmap_data1, heatmap_data2):

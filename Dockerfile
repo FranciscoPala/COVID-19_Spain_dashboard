@@ -9,7 +9,7 @@ EXPOSE 8501
 COPY data /src/data
 COPY app.py /src/app.py
 COPY .streamlit /src/.streamlit
-COPY utils/funcs.py /src/utils/funcs.py
+COPY utils/app_funcs.py /src/utils/app_funcs.py
 
 ENTRYPOINT [ "streamlit", "run" ]
 CMD ["app.py"]

@@ -30,7 +30,6 @@ prov = pd.read_csv(cwd / 'data/provincias.csv')
 ccaa_map = prov.set_index('codigoProvincia').codigoCCAA
 data['autonomousCommunity'] = data.province.str.strip().replace(ccaa_map)
 pop = pd.read_csv(cwd / 'data/population_spain_10s.csv')
-pop_totals = pop.groupby('age').population.sum().drop('total').reset_index()
 
 ##################
 # OVERVIEW SECTION
@@ -78,61 +77,60 @@ if rad== "Overview":
 
 if rad == "Cases":
 
-    # ploty cases
+    # 1. Lineplot Figure
     st.write("""
     ## Daily Cases By Age
     """)
     # process the data to plot
-    age_series = get_sma7_by_age(data)
+    age_series = get_sma7_gby_age_date(data)
     fig = plot_lineplot(age_series, 'dailyCases')
     # send to streamlit
     st.plotly_chart(fig, use_container_width=True)
     
-    # heatmap + totals by wave section
+    # 2. Wave Totals Figure
     st.write("""
     ## Within-Wave Distribution by Age and Total Cases
     """)
-
-    # get data for heatmap and wave totals
-    heatmap = get_heatmap_data_wave_norm(data, variable='cases')
-    wave_totals = get_wave_totals(data)
-
-    # plot heatmap + barplot
-    fig = plot_heatmap_wave(
+    # get data for wave heatmap
+    heatmap = get_wave_heatmap_data(data, variable='cases')
+    # get data for barplot
+    wave_totals = data.groupby('wave', as_index=False).sum()
+    # plot wave figure: wave/age heatmap + wave totals barplot
+    fig = plot_wave_heatmap(
         heatmap_data=heatmap, 
         barplot_data=wave_totals, 
         variable='cases')
-
-    # save to image and 
+    # save to image and plot
     buf = BytesIO()
     fig.savefig(buf, format="png")
     st.image(buf)
 
-    # heatmap + totals by age section
+    # 3. Age totals Figure
     st.write("""
     ## Within-Age Distribution by Wave and Total Cases
     """)
-
-    # get data for heatmap and total pop
-    heatmap = get_heatmap_data_age_norm(data, variable='cases')
-    totals_age = data.groupby('age').sum().drop('NC').reset_index()
-
-    # plot population heatmap + barplot
+    # get data for heatmap
+    heatmap = get_age_heatmap_data(data, variable='cases')
+    # get data for barplot
+    age_totals = data.groupby('age').sum().drop('NC').reset_index()
+    # plot population figure: age/wave heatmap + age totals barplot
     fig = plot_heatmap_age(
         heatmap_data=heatmap, 
-        barplot_data=totals_age, 
+        barplot_data=age_totals, 
         variable='cases')
-
-    # save to image and 
+    # save to image and plot
     buf = BytesIO()
     fig.savefig(buf, format="png")
     st.image(buf)
 
-    # 1. Heatmap of cases and total pop
+    # 4. Heatmap of cases and total pop
     st.write("""
     ## Total Cases as % of Total Age Group Population and Total Age Group Population
     """)
-    heatmap = get_heatmap_data_total_pop_norm(data, pop, 'cases')
+    # get data for heatmap
+    heatmap = get_age_totalpop_norm_heatmap_data(data, pop, 'cases')
+    # get data for barplot
+    pop_totals = pop.groupby('age').population.sum().drop('total').reset_index()
     fig = plot_heatmap_pop(heatmap, pop_totals)
     buf = BytesIO()
     fig.savefig(buf, format="png")
@@ -149,7 +147,7 @@ if rad == "Hospitalizations":
     ## Daily Hospitalizations By Age
     """)
     # process the data to plot
-    age_series = get_sma7_by_age(data)
+    age_series = get_sma7_gby_age_date(data)
     fig = plot_lineplot(age_series, 'dailyHospitalizations')
     st.plotly_chart(fig, use_container_width=True)
 
@@ -158,11 +156,11 @@ if rad == "Hospitalizations":
     """)
 
     # get data for heatmap and wave totals
-    heatmap = get_heatmap_data_wave_norm(data, variable='hospitalizations')
-    wave_totals = get_wave_totals(data)
+    heatmap = get_wave_heatmap_data(data, variable='hospitalizations')
+    wave_totals = data.groupby('wave', as_index=False).sum()
 
     # plot heatmap + barplot
-    fig = plot_heatmap_wave(
+    fig = plot_wave_heatmap(
         heatmap_data=heatmap, 
         barplot_data=wave_totals, 
         variable='hospitalizations')
@@ -178,13 +176,13 @@ if rad == "Hospitalizations":
     """)
 
     # get data for heatmap and total pop
-    heatmap = get_heatmap_data_age_norm(data, variable='hospitalizations')
-    totals_age = data.groupby('age').sum().drop('NC').reset_index()
+    heatmap = get_age_heatmap_data(data, variable='hospitalizations')
+    age_totals = data.groupby('age').sum().drop('NC').reset_index()
 
     # plot population heatmap + barplot
     fig = plot_heatmap_age(
         heatmap_data=heatmap, 
-        barplot_data=totals_age, 
+        barplot_data=age_totals, 
         variable='hospitalizations')
 
     # save to image and 
@@ -212,7 +210,7 @@ if rad == "ICU Admissions":
     ## Daily ICU By Age
     """)
     # process the data to plot
-    age_series = get_sma7_by_age(data)
+    age_series = get_sma7_gby_age_date(data)
     fig = plot_lineplot(age_series, 'dailyICU')
     st.plotly_chart(fig, use_container_width=True)
 
@@ -221,11 +219,11 @@ if rad == "ICU Admissions":
     """)
 
     # get data for heatmap and wave totals
-    heatmap = get_heatmap_data_wave_norm(data, variable='icu')
-    wave_totals = get_wave_totals(data)
+    heatmap = get_wave_heatmap_data(data, variable='icu')
+    wave_totals = data.groupby('wave', as_index=False).sum()
 
     # plot heatmap + barplot
-    fig = plot_heatmap_wave(
+    fig = plot_wave_heatmap(
         heatmap_data=heatmap, 
         barplot_data=wave_totals, 
         variable='icu')
@@ -241,13 +239,13 @@ if rad == "ICU Admissions":
     """)
 
     # get data for heatmap and total pop
-    heatmap = get_heatmap_data_age_norm(data, variable='icu')
-    totals_age = data.groupby('age').sum().drop('NC').reset_index()
+    heatmap = get_age_heatmap_data(data, variable='icu')
+    age_totals = data.groupby('age').sum().drop('NC').reset_index()
 
     # plot population heatmap + barplot
     fig = plot_heatmap_age(
         heatmap_data=heatmap, 
-        barplot_data=totals_age, 
+        barplot_data=age_totals, 
         variable='icu')
 
     # save to image and 
@@ -275,7 +273,7 @@ if rad == "Deaths":
     ## Daily Deaths By Age
     """)
     # process the data to plot
-    age_series = get_sma7_by_age(data)
+    age_series = get_sma7_gby_age_date(data)
     fig = plot_lineplot(age_series, 'dailyDeaths')
     st.plotly_chart(fig, use_container_width=True)
 
@@ -284,11 +282,11 @@ if rad == "Deaths":
     """)
 
     # get data for heatmap and wave totals
-    heatmap = get_heatmap_data_wave_norm(data, variable='deaths')
-    wave_totals = get_wave_totals(data)
+    heatmap = get_wave_heatmap_data(data, variable='deaths')
+    wave_totals = data.groupby('wave', as_index=False).sum()
 
-    # plot heatmap + barplot
-    fig = plot_heatmap_wave(
+    # plot wave heatmap + wave totals barplot
+    fig = plot_wave_heatmap(
         heatmap_data=heatmap, 
         barplot_data=wave_totals, 
         variable='deaths')
@@ -302,13 +300,13 @@ if rad == "Deaths":
     """)
 
     # get data for heatmap and total pop
-    heatmap = get_heatmap_data_age_norm(data, variable='deaths')
-    totals_age = data.groupby('age').sum().drop('NC').reset_index()
+    heatmap = get_age_heatmap_data(data, variable='deaths')
+    age_totals = data.groupby('age').sum().drop('NC').reset_index()
 
     # plot population heatmap + barplot
     fig = plot_heatmap_age(
         heatmap_data=heatmap, 
-        barplot_data=totals_age, 
+        barplot_data=age_totals, 
         variable='deaths')
 
     # save to image and 
