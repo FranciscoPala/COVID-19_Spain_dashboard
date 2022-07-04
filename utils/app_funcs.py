@@ -16,7 +16,7 @@ def get_data(): # added to class DataHandler
         data(pd.DataFrame): gathered dataframe with some basic formatting
     """
     url = 'https://cnecovid.isciii.es/covid19/resources/casos_hosp_uci_def_sexo_edad_provres.csv'
-    data = pd.read_csv(url).convert_dtypes()
+    data = pd.read_csv(url, keep_default_na=False).convert_dtypes()
     data.fecha = pd.to_datetime(data.fecha)
     # renames
     col_rename = {
@@ -43,10 +43,33 @@ def get_data(): # added to class DataHandler
     return data
 
 
+def map_province(covid_data, prov_data):
+    """Maps the province to its autonomous community on covid dataset
+
+    Args:
+        covid_data (pd.DataFrame): covid data gathered by get_data()
+        prov_data (pd.DataFrame): dataframe with province info
+    Returns:
+        pd.DataFrame: dataframe with the autonomousComunity variable
+    """
+    ccaa_map = prov_data.set_index('codigoProvincia').nombreCCAA
+    covid_data['autonomousCommunity'] = covid_data.province.str.strip().replace(ccaa_map)
+    return covid_data
+
+
+
 # DATA PROCESSING FUNCTIONS
 ############################
 
-def get_sma7_gby_date(data): # Added to class DataHandler
+def get_sma7_gby_date(data):
+    """Takes the covid dataset and returns the daily 7-day moving average
+
+    Args:
+        data (pd.DataFrame): covid dataset returned by get_data()
+
+    Returns:
+        pd.DataFrame: sma7 of observed variables
+    """
     by_date = data.groupby('date').agg(
         dailyCases = ('cases', sum),
         dailyHospitalizations = ('hospitalizations', sum),
@@ -56,7 +79,16 @@ def get_sma7_gby_date(data): # Added to class DataHandler
     return by_date
 
 
-def get_sma7_gby_age_date(data): # Added to class DataHandler
+def get_sma7_gby_age_date(data):
+    """groups by age and date and calculates the daile 7day-sma for each age group
+
+    Args:
+        data (pd.DataFrame): covid dataset returned by get_data()
+
+    Returns:
+        pd.DataFrame: sma7 by age and date of observed variables
+    """
+    # get daily data by age group
     by_age = data.groupby(['age', 'date']).agg(
         dailyCases = ('cases', sum),
         dailyHospitalizations = ('hospitalizations', sum),
@@ -66,6 +98,7 @@ def get_sma7_gby_age_date(data): # Added to class DataHandler
     # smooth to sma7
     by_age = by_age.set_index('date').groupby('age').rolling(7).mean()
     by_age = by_age.fillna(0).astype(int).reset_index()
+    # also generate an 'all ages' age group for future plotting
     all_ages = by_age.groupby('date', as_index=False).sum()
     all_ages['age'] = 'All Ages'
     data_out = pd.concat([by_age, all_ages])
@@ -73,23 +106,40 @@ def get_sma7_gby_age_date(data): # Added to class DataHandler
 
 
 def get_waves(get_sma7_gby_date, data):
+    """_summary_
+
+    Args:
+        get_sma7_gby_date (python function): gets the daily sma7 of observed variabels
+        data (pd.DataFrame): covid dataset returned by get_data()
+
+    Returns:
+        pd.DataFrame: dataframe with the added "waves" column
+    """
+    # get daily totals
     daily_totals = get_sma7_gby_date(data)
     # get peak indices
     peaks, _ = find_peaks(
         x = daily_totals.dailyCases,
         width=20
         )
+    # get peak dates
     peak_dates = daily_totals.iloc[peaks].date
     peaks_array = peak_dates.values
+    # find valleys as minimum between peaks
     valleys = []
     for i in range(1,peaks_array.size):
+        # subset dataset between peaks
         lower_bound = peaks_array[i-1]
         upper_bound = peaks_array[i]
         mask = daily_totals.date.between(lower_bound, upper_bound)
+        # get index of the minumum
         valleys.append(daily_totals[mask].dailyCases.idxmin())
+    # get dates from the indices list
     valley_dates = daily_totals.iloc[valleys].date.values
+    # inserts required for pd.cut
     wave_dates = np.insert(valley_dates, 0, data.date.min())
     wave_dates = np.insert(wave_dates, wave_dates.size, data.date.max())
+    # create the numerical variable wave 
     data['wave'] = pd.cut(
         data.date, 
         bins=wave_dates,
@@ -97,7 +147,7 @@ def get_waves(get_sma7_gby_date, data):
         include_lowest = True,
         labels = range(1, wave_dates.size)
         )
-    return data, peak_dates, valley_dates
+    return data
 
 
 def get_wave_heatmap_data(data, variable):

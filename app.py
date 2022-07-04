@@ -127,9 +127,9 @@ if rad == "Cases":
     st.write("""
     ## Total Cases as % of Total Age Group Population and Total Age Group Population
     """)
-    # get data for heatmap
+    # get heatmap data
     heatmap = get_age_totalpop_norm_heatmap_data(data, pop, 'cases')
-    # get data for barplot
+    # get barplot data
     pop_totals = pop.groupby('age').population.sum().drop('total').reset_index()
     fig = plot_heatmap_pop(heatmap, pop_totals)
     buf = BytesIO()
