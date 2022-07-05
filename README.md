@@ -1,9 +1,10 @@
 # Covid-19 Dashboard for Spain
-Steps and code explained <a href="https://franciscopala.github.io/portfolio_covid_app.html">here</a>
+<a href="https://franciscopala.github.io/portfolio_covid_app.html">Portfolio link</a>
+
 ## Code and Resources
-**Python Version:** 3.8.10
-**Docker Version:** 20.10.16
-**AWS CLI Version:** aws-cli/2.7.9 Python/3.9.11 Windows/10 exe/AMD64 prompt/off
+**Python Version:** 3.8.10  
+**Docker Version:** 20.10.16  
+**AWS CLI Version:** aws-cli/2.7.9 Python/3.9.11 Windows/10 exe/AMD64 prompt/off  
 
 ## Deployment
 To run the app locally:
