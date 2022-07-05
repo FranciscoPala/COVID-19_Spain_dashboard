@@ -27,9 +27,9 @@ rad = st.sidebar.radio(
 # read csv to process
 data = pd.read_csv(cwd / 'data/covid_19_spain.csv', sep = ';')
 prov = pd.read_csv(cwd / 'data/provincias.csv')
-ccaa_map = prov.set_index('codigoProvincia').codigoCCAA
-data['autonomousCommunity'] = data.province.str.strip().replace(ccaa_map)
 pop = pd.read_csv(cwd / 'data/population_spain_10s.csv')
+# map province to autonomous community
+data = map_province(data, prov)
 
 ##################
 # OVERVIEW SECTION
@@ -56,8 +56,7 @@ if rad== "Overview":
 
     data = pd.read_csv(cwd / 'data/covid_19_spain.csv', sep = ';')
     prov = pd.read_csv(cwd / 'data/provincias.csv')
-    ccaa_map = prov.set_index('codigoProvincia').codigoCCAA
-    data['autonomousCommunity'] = data.province.str.strip().replace(ccaa_map)
+    data = map_province(data, prov)
     st.write("Last Update: {}".format(data.date.max()))
     st.markdown("""
     ### Covid Data

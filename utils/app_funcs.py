@@ -57,7 +57,6 @@ def map_province(covid_data, prov_data):
     return covid_data
 
 
-
 # DATA PROCESSING FUNCTIONS
 ############################
 
@@ -151,6 +150,20 @@ def get_waves(get_sma7_gby_date, data):
 
 
 def get_wave_heatmap_data(data, variable):
+    """groups the covid dataset by age group and wave and creates a contingency
+    table representing all age-wave combinations normalized to wave totals
+
+    Args:
+        data (pd.DataFrame): covid dataset returned by get_data()
+        variable (string): observed variable
+            'cases' covid cases
+            'hospitalizations': hospitalizations 
+            'icu': ICU admissions
+            'deaths': SMA-7 of the daths variable
+
+    Returns:
+        pandas.DataFrame: contingency table for the age group and wave variables
+    """
     # gby age and wave
     totals_age_wave = data.groupby(['age', 'wave'], as_index = False).sum()
     # drop NC age
@@ -168,6 +181,20 @@ def get_wave_heatmap_data(data, variable):
 
 
 def get_age_heatmap_data(data, variable):
+    """groups the covid dataset by age group and wave and creates a contingency
+    table representing all age-wave combinations normalized to age totals
+
+    Args:
+        data (pd.DataFrame): covid dataset returned by get_data()
+        variable (string): observed variable
+            'cases' covid cases
+            'hospitalizations': hospitalizations 
+            'icu': ICU admissions
+            'deaths': SMA-7 of the daths variable
+
+    Returns:
+        pandas.DataFrame: contingency table for the age group and wave variables
+    """
     # gby age and wave
     totals_age_wave = data.groupby(['age', 'wave'], as_index = False).sum()
     # drop NC age
@@ -183,13 +210,27 @@ def get_age_heatmap_data(data, variable):
         )
     return heatmap_age_wave
 
+
 def get_hosp_ratio_data(data, pop):
+    """
+
+    Args:
+        data (pd.DataFrame): covid dataset returned by get_data()
+        pop (pd.Dataframe): population DataFrame
+
+    Returns:
+        _type_: _description_
+    """
+    # get totals
     totals_age_wave = data.groupby(['age', 'wave'], as_index = False).sum()
     total_pop = pop.groupby('age').population.sum().drop('total')
+    # drop NC
     mask = totals_age_wave.age != 'NC'
     totals_age_wave = totals_age_wave[mask]
+    # calculate crosstabs
     cases = pd.crosstab(totals_age_wave.wave, totals_age_wave.age, totals_age_wave.cases, aggfunc=sum)
     hosp = pd.crosstab(totals_age_wave.wave, totals_age_wave.age, totals_age_wave.hospitalizations, aggfunc=sum)
+    # get ratios
     hosp_cases = hosp/cases
     hosp_total_pop = hosp/total_pop
     return hosp_cases, hosp_total_pop
@@ -220,6 +261,21 @@ def get_deaths_ratio_data(data, pop):
 
 
 def get_age_totalpop_norm_heatmap_data(data, data_pop, variable):
+    """returns contingency table for age-wave combinations normalize to the
+    total Spanish population
+
+    Args:
+        data (pd.DataFrame): covid dataset returned by get_data()
+        data_pop (pd.DataFrame): dataset with information on the spanish population
+        variable (string): observed variable
+            'cases' covid cases
+            'hospitalizations': hospitalizations 
+            'icu': ICU admissions
+            'deaths': SMA-7 of the daths variable
+
+    Returns:
+        pandas.DataFrame: contingency table for the age group and wave variables
+    """
     # gby age and wave
     totals_age_wave = data.groupby(['age', 'wave'], as_index = False).sum()
     # drop NC age
@@ -232,13 +288,53 @@ def get_age_totalpop_norm_heatmap_data(data, data_pop, variable):
         values = totals_age_wave[variable], 
         aggfunc=sum,
         )
+    # normalize to Spanish total pop by age group
     total_pop = data_pop.groupby('age').population.sum().drop('total')
     heatmap_wave_age = heatmap_wave_age/total_pop
     heatmap_wave_age = heatmap_wave_age.T
     return heatmap_wave_age
 
 
+# PLOT FUNCTIONS
+################
+
+def plot_lineplot(data, variable):
+    """plots a time-series line plot of the selected variable using plotly
+
+    Args:
+        data (pd.DataFrame): covid-data grouped by date and age
+        variable (string): observed variable
+            'cases': SMA-7 of the cases variable
+            'hospitalizations': SMA-7 of the hospitalizations variable
+            'icu': SMA-7 of the icu variable
+            'daths': SMA-7 of the daths variable
+
+    Returns:
+        plotly.graph_objects.Figure: interactive plotly visualization
+    """
+    fig = px.line(
+        data, 
+        x="date",
+        y=variable, 
+        color='age',
+        template = 'simple_white',
+        width=1600,
+        height=500,
+        title = '7-day Simple Moving Average of {}'.format(variable.capitalize()))
+    return fig
+
+
 def plot_wave_heatmap(heatmap_data, barplot_data, variable):
+    """plots a figure consisting of a heatmap and a barplot
+
+    Args:
+        heatmap_data (pandas.DataFrame): contingency table for the heatmap
+        barplot_data (pd.DataFrame): wave totals 
+        variable (string): observed variable
+
+    Returns:
+        matplotlib.Figure: figure consisting of a heatmap and a horizontal bar plot
+    """
     size_unit=np.array([1.7*1.77, 1])
     fig, ax = plt.subplots(1, 2, figsize=7*size_unit, gridspec_kw={"width_ratios": (.6, .4)})
     fig.subplots_adjust(wspace=0, hspace=0)
@@ -285,20 +381,17 @@ def plot_wave_heatmap(heatmap_data, barplot_data, variable):
     return fig
 
 
-def plot_lineplot(data, variable):
-    fig = px.line(
-        data, 
-        x="date",
-        y=variable, 
-        color='age',
-        template = 'simple_white',
-        width=1600,
-        height=500,
-        title = '7-day Simple Moving Average of {}'.format(variable.capitalize()))
-    return fig
-
-
 def plot_heatmap_age(heatmap_data, barplot_data, variable):
+    """plots a figure consisting of a heatmap and a barplot
+
+    Args:
+        heatmap_data (pandas.DataFrame): contingency table for the heatmap
+        barplot_data (pd.DataFrame): age totals 
+        variable (string): observed variable
+
+    Returns:
+        matplotlib.Figure: figure consisting of a heatmap and a horizontal bar plot
+    """
     size_unit=np.array([1.7*1.77, 1])
     fig, ax = plt.subplots(1, 2, figsize=7*size_unit, gridspec_kw={"width_ratios": (.6, .4)})
     fig.subplots_adjust(wspace=0, hspace=0)
@@ -346,6 +439,15 @@ def plot_heatmap_age(heatmap_data, barplot_data, variable):
 
 
 def plot_heatmap_pop(heatmap_data, pop_data):
+    """plots a figure consisting of a heatmap and a barplot
+
+    Args:
+        heatmap_data (pandas.DataFrame): contingency table for the heatmap
+        pop_data (pd.DataFrame): spanish population totals by age group 
+
+    Returns:
+        matplotlib.Figure: figure consisting of a heatmap and a horizontal bar plot
+    """
     # figure and spacing
     size_unit=np.array([1.7*1.77, 1])
     fig, ax = plt.subplots(1, 2, figsize=7*size_unit, gridspec_kw={"width_ratios": (.6, .4)})
@@ -394,25 +496,32 @@ def plot_heatmap_pop(heatmap_data, pop_data):
 
 
 
+def plot_heatmap_ratios_hosp(heatmap_cases_norm, heatmap_pop_norm):
+    """plots both crosstabs returned from get_hosp_ratio_data()
 
+    Args:
+        heatmap_cases_norm (pd.DataFrame): xtab of age-wave normalized to cases
+        heatmap_pop_norm (pd.DataFrame): xtab of age-wave normalized to population
 
-def plot_heatmap_ratios_hosp(heatmap_data1, heatmap_data2):
+    Returns:
+        matplotlib.Figure: figure consisting of two heatmaps
+    """
     # figure and spacing
     size_unit=np.array([1.7*1.77, 1])
     fig, ax = plt.subplots(1, 2, figsize=7*size_unit, gridspec_kw={"width_ratios": (.5, .5)})
     fig.subplots_adjust(wspace=0, hspace=0)
-    # heatmap
+    # heatmap normalized to cases
     sns.heatmap(
-        data = heatmap_data1.T, 
+        data = heatmap_cases_norm.T 
         annot=True, 
         linewidths=0.1, 
         cmap='Blues', 
         fmt='.2%', 
         ax = ax[0],
         )
-    # barplot
+    # heatmap normalized to total population by age group
     sns.heatmap(
-        data = heatmap_data2.T, 
+        data = heatmap_pop_norm.T, 
         annot=True, 
         linewidths=0.1, 
         cmap='Blues', 
@@ -423,7 +532,6 @@ def plot_heatmap_ratios_hosp(heatmap_data1, heatmap_data2):
     # Axes styling
     ax[0].tick_params(axis=u'both', which=u'both',length=0)
     ax[1].tick_params(axis=u'both', which=u'both',length=0)
-
     # titles
     ax[0].set_title('Hospitalizations by Wave as Percentage of Cases')
     ax[1].set_title('Hospitalizations by Wave as Percentage of Age-Group Population')
