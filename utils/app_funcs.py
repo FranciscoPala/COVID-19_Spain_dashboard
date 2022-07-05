@@ -512,7 +512,7 @@ def plot_heatmap_ratios_hosp(heatmap_cases_norm, heatmap_pop_norm):
     fig.subplots_adjust(wspace=0, hspace=0)
     # heatmap normalized to cases
     sns.heatmap(
-        data = heatmap_cases_norm.T 
+        data = heatmap_cases_norm.T,
         annot=True, 
         linewidths=0.1, 
         cmap='Blues', 
